@@ -7,6 +7,7 @@ fetch('./data.json')
     console.log("Error: " + err)
   });
 
+//load products grid with all the data in the data.json file
 function loadProducts(data) {
   console.log(data);
   let innerHTML = ``;
@@ -19,6 +20,7 @@ function loadProducts(data) {
     let productPrice = data.products[i].priceInCents / 100; //divide by 100 to convert to proper decimal
     productPrice = productPrice.toFixed(2); //only show to 2 decimal places
 
+    //add to product list with the following HTML
     innerHTML += `<div class="col d-flex flex-column">
           <div class="card">
             <div
@@ -41,7 +43,7 @@ function loadProducts(data) {
             </div>
             <div class="mb-2 px-3 fw-bold">$${productPrice}</div>
             <div class="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-              <button type="button" class="btn btn-primary btn-sm">
+              <button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">
                 Add To Cart
               </button>
             </div>
