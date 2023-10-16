@@ -1,5 +1,7 @@
 let productsGrid = document.getElementById("products-grid");
 
+//MUST LOAD WEB PAGE ON LIVE SERVER IN ORDER FOR FETCH TO WORK HERE 
+//(CANNOT FETCH FILES IF NOT ON SERVER)
 fetch('./data.json')
   .then((response) => response.json())
   .then((products) => loadProducts(products))
