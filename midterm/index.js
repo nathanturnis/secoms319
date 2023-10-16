@@ -52,3 +52,7 @@ function loadProducts(data) {
   }
   productsGrid.innerHTML = innerHTML;
 }
+
+function search() {
+  console.log(document.getElementById("search-input").value);
+}
