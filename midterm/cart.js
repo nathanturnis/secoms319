@@ -1,4 +1,5 @@
-var productsInCart = 0;
+var productsInCart;
+getCart();
 var countText = document.getElementById("cart-counter");
 countText.innerHTML = productsInCart;
 
@@ -12,4 +13,15 @@ function addToCart() {
 function removeFromCart() {
     productsInCart--;
     countText.innerHTML = productsInCart;
+}
+
+function storeCart() {
+    localStorage.setItem("cartCount", productsInCart);
+}
+
+function getCart() {
+    productsInCart = localStorage.getItem("cartCount");
+    if (productsInCart == null) {
+        productsInCart = 0;
+    }
 }
