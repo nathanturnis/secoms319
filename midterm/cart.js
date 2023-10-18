@@ -1,6 +1,7 @@
 
 var productsInCart;
 var cartArray = [];
+var totalPrice = 0;
 getCart();
 var countText = document.getElementById("cart-counter");
 countText.innerHTML = productsInCart;
@@ -72,6 +73,7 @@ function loadItemsInCart() {
             for (var i = 0; i < cartArray.length; i++) {
                 for (let product of productsList.products) {
                     if (product.id == cartArray[i]) {
+                        totalPrice += product.priceInCents;
                         let productPrice = product.priceInCents / 100; //divide by 100 to convert to proper decimal
                         productPrice = productPrice.toFixed(2); //only show to 2 decimal places
                         html += `<div class="d-flex p-3">
@@ -109,6 +111,9 @@ function loadItemsInCart() {
                 }
             }
             document.getElementById("cart-products").innerHTML = html;
+            totalPrice /= 100;
+            totalPrice = totalPrice.toFixed(2);
+            document.getElementById("total-price").innerHTML = `$${totalPrice}`;
         }
         )
         .catch(function (err) {
