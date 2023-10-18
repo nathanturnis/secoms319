@@ -71,11 +71,109 @@
       </nav>
     </header>
 
-    <div class="container mt-3">
-      <h2 id="items-in-cart">Items in cart:</h2>
-      <button class="btn btn-primary" onclick="removeFromCart()">
-        Remove from cart
-      </button>
+    <div class="container mt-5">
+      <h3>Review your order</h3>
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="card p-3">
+            <div id="product-1" class="d-flex p-1">
+              <img
+                src="./images/products/basketball.jpg"
+                class="img-fluid me-3"
+                style="max-height: 120px" />
+              <div>
+                <div
+                  class="overflow-hidden"
+                  style="
+                    font-size: larger;
+                    font-weight: bold;
+                    height: 60px;
+                    width: 300px;
+                  ">
+                  Round Airtight Food Storage Containers
+                </div>
+                <div style="color: tomato; font-size: medium">$8.99</div>
+                <div>
+                  <a
+                    class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                    href=""
+                    onclick="removeFromCart()"
+                    >Remove</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div id="product-2" class="d-flex p-1 mb-3">
+              <img
+                src="./images/products/basketball.jpg"
+                class="img-fluid me-3"
+                style="max-height: 120px" />
+              <div>
+                <div
+                  class="overflow-hidden"
+                  style="
+                    font-size: larger;
+                    font-weight: bold;
+                    height: 60px;
+                    width: 300px;
+                  ">
+                  Round Airtight Food Storage Containers
+                </div>
+                <div style="color: tomato; font-size: medium">$8.99</div>
+                <div>
+                  <a
+                    class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                    href=""
+                    onclick="removeFromCart()"
+                    >Remove</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="card p-3">
+            <h2 id="items-in-cart">Items in cart:</h2>
+            <p>Total</p>
+            <div class="d-flex justify-content-start">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="paymentSelector"
+                  id="paymentSelector" />
+                <label class="form-check-label" for="paymentSelector">
+                  Debit/Credit Card
+                </label>
+              </div>
+              <div class="form-check ms-3">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="paymentSelector"
+                  id="paymentSelector"
+                  checked />
+                <label class="form-check-label" for="paymentSelector">
+                  PayPal
+                </label>
+              </div>
+              <div class="form-check ms-3">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="paymentSelector"
+                  id="paymentSelector"
+                  checked />
+                <label class="form-check-label" for="paymentSelector">
+                  Gift Card
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary m-1">Place Order</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="./cart.js"></script>
