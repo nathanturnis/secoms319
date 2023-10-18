@@ -14,6 +14,9 @@ if (itemsInCartText != null) {
 if (productsInCart > 0 && location.pathname == "/midterm/cart.html") {
     cartArray = localStorage.getItem("cartArray");
     loadItemsInCart();
+} else if (productsInCart <= 0 && location.pathname == "/midterm/cart.html") {
+    let html = `<h5>Cart is empty. Add products to the cart to view them.</h5>`;
+    document.getElementById("cart-products").innerHTML = html;
 }
 
 //adds a product to the cart
@@ -55,6 +58,7 @@ function getCart() {
     }
 }
 
+//load items
 function loadItemsInCart() {
 
     var html = ``;
@@ -68,6 +72,8 @@ function loadItemsInCart() {
             for (var i = 0; i < cartArray.length; i++) {
                 for (let product of productsList.products) {
                     if (product.id == cartArray[i]) {
+                        let productPrice = product.priceInCents / 100; //divide by 100 to convert to proper decimal
+                        productPrice = productPrice.toFixed(2); //only show to 2 decimal places
                         html += `<div class="d-flex p-3">
             <div class="me-3 text-center" style="height: 120px; width: 120px">
                 <img
@@ -86,7 +92,7 @@ function loadItemsInCart() {
                   ">
                   ${product.name}
                 </div>
-                <div style="color: tomato; font-size: medium">$8.99</div>
+                <div style="color: tomato; font-size: medium">$${productPrice}</div>
                 <div>
                   <a
                     class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"

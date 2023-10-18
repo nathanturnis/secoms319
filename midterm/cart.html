@@ -75,99 +75,46 @@
       <h3>Review your order</h3>
       <div class="row g-3">
         <div class="col-md-8">
-          <div class="card p-3 mb-5" id="cart-products">
-            <!-- <div class="d-flex p-1">
-              <img
-                src="./images/products/basketball.jpg"
-                class="img-fluid me-3"
-                style="max-height: 120px" />
-              <div>
-                <div
-                  class="overflow-hidden"
-                  style="
-                    font-size: larger;
-                    font-weight: bold;
-                    height: 60px;
-                    width: 300px;
-                  ">
-                  Round Airtight Food Storage Containers
-                </div>
-                <div style="color: tomato; font-size: medium">$8.99</div>
-                <div>
-                  <a
-                    class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                    href=""
-                    onclick="removeFromCart()"
-                    >Remove</a
-                  >
-                </div>
-              </div>
-            </div> 
-            <div id="product-2" class="d-flex p-1 mb-3">
-              <img
-                src="./images/products/basketball.jpg"
-                class="img-fluid me-3"
-                style="max-height: 120px" />
-              <div>
-                <div
-                  class="overflow-hidden"
-                  style="
-                    font-size: larger;
-                    font-weight: bold;
-                    height: 60px;
-                    width: 300px;
-                  ">
-                  Round Airtight Food Storage Containers
-                </div>
-                <div style="color: tomato; font-size: medium">$8.99</div>
-                <div>
-                  <a
-                    class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                    href=""
-                    onclick="removeFromCart()"
-                    >Remove</a
-                  >
-                </div>
-              </div>
-            </div>-->
-          </div>
+          <div class="card p-3 mb-5" id="cart-products"></div>
         </div>
+
         <div class="col-6 col-md-4">
           <div class="card p-3 mb-5">
             <h2 id="items-in-cart">Items in cart:</h2>
             <p>Total</p>
             <div class="d-flex justify-content-start">
-              <div class="form-check">
+              <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="paymentSelector"
-                  id="paymentSelector" />
-                <label class="form-check-label" for="paymentSelector">
-                  Debit/Credit Card
-                </label>
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="option1" />
+                <label class="form-check-label" for="inlineRadio1"
+                  >Debit/Credit Card</label
+                >
               </div>
-              <div class="form-check ms-3">
+              <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="paymentSelector"
-                  id="paymentSelector"
-                  checked />
-                <label class="form-check-label" for="paymentSelector">
-                  PayPal
-                </label>
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="option2" />
+                <label class="form-check-label" for="inlineRadio2"
+                  >PayPal</label
+                >
               </div>
-              <div class="form-check ms-3">
+              <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="paymentSelector"
-                  id="paymentSelector"
-                  checked />
-                <label class="form-check-label" for="paymentSelector">
-                  Gift Card
-                </label>
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="option3" />
+                <label class="form-check-label" for="inlineRadio3"
+                  >Gift Card</label
+                >
               </div>
             </div>
             <button class="btn btn-primary m-1">Place Order</button>
