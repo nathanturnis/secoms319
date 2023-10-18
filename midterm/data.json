@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Adult Plain T-Shirt",
       "image": "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
       "rating": {
@@ -11,7 +11,7 @@
       "priceInCents": 1299
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Medium Basketball",
       "image": "images/products/basketball.jpg",
       "rating": {
@@ -21,7 +21,7 @@
       "priceInCents": 2095
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "2 Slot Toaster - Black",
       "image": "images/products/black-2-slot-toaster.jpg",
       "rating": {
@@ -31,7 +31,7 @@
       "priceInCents": 1899
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Women's Chiffon Beachware Cover Up",
       "image": "images/products/women-chiffon-beachwear-coverup-black.jpg",
       "rating": {
@@ -41,7 +41,7 @@
       "priceInCents": 2070
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Facial Tissue 2-Ply",
       "image": "images/products/facial-tissue-2-ply.jpg",
       "rating": {
@@ -51,7 +51,7 @@
       "priceInCents": 1899
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Duvet Cover Set for Twin Beds - Blue",
       "image": "images/products/duvet-cover-set-blue-twin.jpg",
       "rating": {
@@ -61,7 +61,7 @@
       "priceInCents": 2499
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Mens Slim Fit Summer Shorts - Gray",
       "image": "images/products/men-slim-fit-summer-shorts-gray.jpg",
       "rating": {
@@ -71,7 +71,7 @@
       "priceInCents": 4999
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Round Airtight Food Storage Containers",
       "image": "images/products/round-airtight-food-storage-containers.jpg",
       "rating": {
@@ -81,7 +81,7 @@
       "priceInCents": 1899
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "Black Sunglasses",
       "image": "images/products/sunglasses-black.jpg",
       "rating": {
@@ -91,7 +91,7 @@
       "priceInCents": 1299
     },
     {
-      "id": "10",
+      "id": 10,
       "name": "6-Piece Towel Set",
       "image": "images/products/towel-set-6-piece.jpg",
       "rating": {
@@ -101,7 +101,7 @@
       "priceInCents": 3699
     },
     {
-      "id": "11",
+      "id": 11,
       "name": "Mens Zipup Hoodie - Red",
       "image": "images/products/men-zip-hoodie-red.jpg",
       "rating": {

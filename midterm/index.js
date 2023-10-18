@@ -15,6 +15,8 @@ function loadProducts(data) {
   let innerHTML = ``;
   for (let i = 0; i < data.products.length; i++) {
 
+    let productID = data.products[i].id;
+    console.log(productID);
     let productName = data.products[i].name;
     let productImage = data.products[i].image;
     let starsImage = `images/ratings/rating-${data.products[i].rating.stars * 10}.png`;
@@ -45,7 +47,7 @@ function loadProducts(data) {
             </div>
             <div class="mb-2 px-3 fw-bold">$${productPrice}</div>
             <div class="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-              <button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">
+              <button type="button" class="btn btn-primary btn-sm" data-product-id="${productID}" onclick="addToCart(this)">
                 Add To Cart
               </button>
             </div>
