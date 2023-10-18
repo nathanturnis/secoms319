@@ -26,12 +26,14 @@ function addToCart(product) {
 }
 
 //remove a product from the cart 
-function removeFromCart() {
+function removeFromCart(item) {
     if (productsInCart <= 0) return;
     productsInCart--;
     countText.innerHTML = productsInCart;
     itemsInCartText.innerHTML = `Items in cart: ${productsInCart}`;
-    cartArray.pop();
+    // cartArray.pop();
+    console.log(item.getAttribute("data-array-index"));
+    cartArray.splice(parseInt(item.getAttribute("data-array-index")), 1);
     storeCart();
 }
 
@@ -66,11 +68,13 @@ function loadItemsInCart() {
             for (var i = 0; i < cartArray.length; i++) {
                 for (let product of productsList.products) {
                     if (product.id == cartArray[i]) {
-                        html += `<div class="d-flex p-1">
-              <img
-                src="./${product.image}"
-                class="img-fluid me-3"
-                style="max-height: 120px" />
+                        html += `<div class="d-flex p-3">
+            <div class="me-3 text-center" style="height: 120px; width: 120px">
+                <img
+                    src="./${product.image}"
+                    class="img-fluid" style="max-height: 100%;"/>
+            </div
+            <div>
               <div>
                 <div
                   class="overflow-hidden"
@@ -87,9 +91,11 @@ function loadItemsInCart() {
                   <a
                     class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                     href=""
-                    onclick="removeFromCart()"
+                    data-array-index="${i}"
+                    onclick="removeFromCart(this)"
                     >Remove</a
                   >
+                </div>
                 </div>
               </div>
             </div>`
