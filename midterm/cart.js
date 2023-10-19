@@ -57,7 +57,7 @@ function getCart() {
     }
     if (cartArray == null) {
         console.log("array is null");
-        cartArray = [""];
+        cartArray = [];
         localStorage.setItem("cartArray", JSON.stringify(cartArray));
         return;
     }
