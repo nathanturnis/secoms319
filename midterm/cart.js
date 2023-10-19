@@ -54,7 +54,6 @@ function getCart() {
     if (productsInCart == null) {
         productsInCart = 0;
         localStorage.setItem("cartCount", productsInCart);
-        return;
     }
     if (cartArray == null) {
         console.log("array is null");
