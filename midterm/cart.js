@@ -12,10 +12,10 @@ if (itemsInCartText != null) {
     itemsInCartText.innerHTML = `Items in cart: ${productsInCart}`;
 }
 
-if (productsInCart > 0 && location.pathname == "/midterm/cart.html") {
+if (productsInCart > 0 && (location.pathname == "/midterm/cart.html" || location.pathname == "secoms319/midterm/cart.html")) {
     cartArray = localStorage.getItem("cartArray");
     loadItemsInCart();
-} else if (productsInCart <= 0 && location.pathname == "/midterm/cart.html") {
+} else if (productsInCart <= 0 && (location.pathname == "/midterm/cart.html" || location.pathname == "secoms319/midterm/cart.html")) {
     let html = `<h5>Cart is empty. Add products to the cart to view them.</h5>`;
     document.getElementById("cart-products").innerHTML = html;
 }
