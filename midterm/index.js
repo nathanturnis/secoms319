@@ -1,3 +1,5 @@
+//SEARCH BAR IS FOR PURE LOOKS RIGHT NOW AND CAN BE IMPLEMENTED LATER
+
 let productsGrid = document.getElementById("products-grid");
 
 //MUST LOAD WEB PAGE ON LIVE SERVER IN ORDER FOR FETCH TO WORK HERE 
@@ -57,6 +59,7 @@ function loadProducts(data) {
   productsGrid.innerHTML = innerHTML;
 }
 
+//to be implemented after midterm (not in reqirements by any manner, just for looks for now)
 function search() {
   console.log(document.getElementById("search-input").value);
 }
