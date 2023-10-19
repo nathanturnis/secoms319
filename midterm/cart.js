@@ -51,6 +51,13 @@ function storeCart() {
 function getCart() {
     productsInCart = localStorage.getItem("cartCount");
     cartArray = localStorage.getItem("cartArray");
+    if (productsInCart == null) {
+        productsInCart = 0;
+        localStorage.setItem("cartCount", productsInCart);
+    }
+    if (cartArray == null) {
+        cartArray = [];
+    }
     console.log(cartArray);
     cartArray = JSON.parse(cartArray);
     console.log(cartArray);
