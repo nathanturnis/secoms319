@@ -58,6 +58,7 @@ function getCart() {
     }
     if (cartArray == null) {
         cartArray = [];
+        localStorage.setItem("cartArray", JSON.stringify(cartArray));
         return;
     }
     console.log(cartArray);
