@@ -115,7 +115,7 @@ body {
   animation-duration: 1000ms;
 }
 
-.test {
+.text-cool {
   width: fit-content;
   font-size: large;
   animation-name: spinY;
