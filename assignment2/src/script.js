@@ -71,26 +71,15 @@ const Browse = () => {
         </div>
     }
 
-    // const listItems = products.map((el) => (
-    //     <div class="row border-top border-bottom" key={el.id}>
-    //         <div class="row main align-items-center">
-    //             <div class="col-2">
-    //                 <img class="img-fluid" src={el.image} />
-    //             </div>
-    //             <div class="col">
-    //                 <div class="row text-muted">{el.title}</div>
-    //                 <div class="row">{el.category}</div>
-    //             </div>
-    //             <div class="col">
-    //                 <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
-    //                 <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
-    //             </div>
-    //             <div class="col">
-    //                 ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
-    //             </div>
-    //         </div>
-    //     </div>
-    // ));
+    const listCartItems = cart.map((el) => (
+        <tr>
+            <th scope="row" style={{ width: 30 + '%' }}><img src={el.image} width={150}></img></th>
+            <th>{el.title}</th>
+            <td>hi</td>
+            <td>${el.price}</td>
+        </tr>
+
+    ));
 
     const handleChange = (e) => {
         setQuery(e.target.value);
@@ -140,16 +129,13 @@ const Browse = () => {
                             <thead>
                                 <tr>
                                     <th scope="col">Item</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Price</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" style={{ width: 30 + '%' }}><img src="./images/blackout-curtains-black.jpg" width={150}></img></th>
-                                    <td style={{ width: 35 + '%' }}>hi</td>
-                                    <td>hello</td>
-                                </tr>
+                                {listCartItems}
                             </tbody>
                         </table>
                     </div>
