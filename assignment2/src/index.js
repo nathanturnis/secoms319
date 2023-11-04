@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import "bootstrap/dist/css/bootstrap.css";
 import App from './App';
-import { Test, Test2 } from './script.js'
+import Browse from './script.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Test />
-    <Test2 />
+    <Browse />
   </React.StrictMode>
 );

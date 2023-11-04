@@ -1,0 +1,56 @@
+[
+  {
+    "id": 10,
+    "title": "Blackout Curtains - Black",
+    "price": 30.99,
+    "description": "These blackout curtains will absorb nearly all light to create a perfect dark atmosphere!",
+    "category": "bedroom",
+    "image": "./images/blackout-curtains-black.jpg",
+    "rating": { "rate": 2.9, "count": 470 }
+  },
+  {
+    "id": 11,
+    "title": "Countertop Blender - 60oz",
+    "price": 108,
+    "description": "This 60oz countertop blender is perfect for creating your smoothies.",
+    "category": "kitchen",
+    "image": "./images/countertop-blender-64-oz.jpg",
+    "rating": { "rate": 4.8, "count": 319 }
+  },
+  {
+    "id": 12,
+    "title": "10-Piece Mixing Bowl Set - Floral",
+    "price": 39,
+    "description": "A variety set of mixing bowls that comes in different sizes with a gorgeous floral design. Lids included.",
+    "category": "kitchen",
+    "image": "./images/floral-mixing-bowl-set.jpg",
+    "rating": { "rate": 4.8, "count": 400 }
+  },
+  {
+    "id": 13,
+    "title": "Kitchen Paper Towels",
+    "price": 1.54,
+    "description": "Ultra strong paper towels that can clean up any mess - big or small.",
+    "category": "kitchen",
+    "image": "./images/kitchen-paper-towels-30-pack.jpg",
+    "rating": { "rate": 2.9, "count": 250 }
+  },
+  {
+    "id": 14,
+    "title": "Coffeemaker - Black",
+    "price": 22.99,
+    "description": "Start your day off right with this coffemaker. Offers premium coffee to ensure you don't miss a beat.",
+    "category": "kitchen",
+    "image": "./images/coffeemaker-black.jpg",
+    "rating": { "rate": 2.2, "count": 140 }
+  },
+  {
+    "id": 15,
+    "title": "Trash Can with Foot Pedal - 50 Liter",
+    "price": 64.99,
+    "description": "A stainless steel trash can that can support 50 liters (13 gallons) worth of trash.",
+    "category": "kitchen",
+    "image": "./images/trash-can-with-foot-pedal-50-liter.jpg",
+    "rating": { "rate": 2.6, "count": 235 }
+  }
+]
