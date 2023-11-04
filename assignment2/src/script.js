@@ -6,6 +6,7 @@ const Browse = () => {
     const [pageState, setPageState] = useState(0);
 
     const [cart, setCart] = useState([]);
+    const [filteredCart, setFilteredCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [query, setQuery] = useState('');
     const [ProductsCategory, setProductsCategory] = useState(Products);
@@ -71,11 +72,11 @@ const Browse = () => {
         </div>
     }
 
-    const listCartItems = cart.map((el) => (
+    const listCartItems = filteredCart.map((el) => (
         <tr>
             <th scope="row" style={{ width: 30 + '%' }}><img src={el.image} width={150}></img></th>
             <th>{el.title}</th>
-            <td>hi</td>
+            <td>{howManyofThis(el.id)}</td>
             <td>${el.price}</td>
         </tr>
 
@@ -91,6 +92,26 @@ const Browse = () => {
 
     }
 
+    const filterCart = () => {
+
+        setFilteredCart((prevFilteredCart) => {
+            // Clear the previous filteredCart
+            let newFilteredCart = [];
+
+            for (let i = 0; i < Products.length; i++) {
+                for (let j = 0; j < cart.length; j++) {
+                    if (Products[i].id === cart[j].id) {
+                        console.log(Products[i]);
+                        newFilteredCart = [...newFilteredCart, Products[i]];
+                        break;
+                    }
+                }
+            }
+
+            return newFilteredCart;
+        });
+    }
+
     if (pageState == 0) {
         return (
             <div>
@@ -101,7 +122,7 @@ const Browse = () => {
                                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                                 <button className="btn btn-outline-success" type="button">Search</button>
                             </form>
-                            <button type="button" className="btn btn-primary" onClick={() => setPageState(1)}>Checkout ({cart.length})</button>
+                            <button type="button" className="btn btn-primary" onClick={() => { setPageState(1); filterCart(); }}>Checkout ({cart.length})</button>
                         </div>
                     </nav>
                 </div>
