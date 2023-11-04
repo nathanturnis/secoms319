@@ -1,9 +1,37 @@
 import React, { useState, useEffect } from "react";
-import products from "./products.json";
+import Products from "./products.json";
+
+const listItems = (ProductsCategory) => {
+    return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
+        {
+            ProductsCategory.map((el) => (
+                <div className="col" key={el.id}>
+                    <div className="card">
+                        <img className="card-img-top p-4" src={el.image}></img>
+                        <div className="card-body">
+                            <h5 className="card-title">{el.title}</h5>
+                            <p className="card-text">${el.price}</p>
+                            <p className="card-text">{el.description}</p>
+                        </div>
+                    </div>
+                    <div className="border bg-body-secondary d-flex justify-content-end">
+                        <div className="btn-group" role="group">
+                            <button type="button" className="btn btn-outline-danger">-</button>
+                            <button type="button" className="btn btn-outline-success">+</button>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+}
 
 const Browse = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
+    const [query, setQuery] = useState('');
+    const [ProductsCategory, setProductsCategory] = useState(Products);
+    console.log(ProductsCategory);
 
     useEffect(() => {
         total();
@@ -40,25 +68,6 @@ const Browse = () => {
         return hmot.length;
     }
 
-    const listItems = products.map((el) => (
-        <div className="col" key={el.id}>
-            <div className="card">
-                <img className="card-img-top p-4" src={el.image}></img>
-                <div className="card-body">
-                    <h5 className="card-title">{el.title}</h5>
-                    <p className="card-text">${el.price}</p>
-                    <p className="card-text">{el.description}</p>
-                </div>
-            </div>
-            <div className="border bg-body-secondary">
-                <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-outline-danger">-</button>
-                    <button type="button" className="btn btn-outline-success">+</button>
-                </div>
-            </div>
-        </div>
-    ));
-
     // const listItems = products.map((el) => (
     //     <div class="row border-top border-bottom" key={el.id}>
     //         <div class="row main align-items-center">
@@ -79,21 +88,33 @@ const Browse = () => {
     //         </div>
     //     </div>
     // ));
+
+    const handleChange = (e) => {
+        setQuery(e.target.value);
+        const results = Products.filter(eachProduct => {
+            if (e.target.value === "") return ProductsCategory;
+            return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+        setProductsCategory(results);
+
+    }
+
     return (
         <div>
             <div>
                 <nav className="navbar bg-body-tertiary">
                     <div className="container-fluid">
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
+                        <button type="button" className="btn btn-primary">Checkout</button>
                     </div>
                 </nav>
             </div>
             <div className="container">
-                <div className="row row-cols-4">
-                    {listItems}
+                <div>
+                    {listItems(ProductsCategory)}
                 </div>
                 <div>Itesm in Cart :</div>
                 <div>{cartItems}</div>
