@@ -50,6 +50,12 @@ const Browse = () => {
                     <p className="card-text">{el.description}</p>
                 </div>
             </div>
+            <div className="border bg-body-secondary">
+                <div className="btn-group" role="group">
+                    <button type="button" className="btn btn-outline-danger">-</button>
+                    <button type="button" className="btn btn-outline-success">+</button>
+                </div>
+            </div>
         </div>
     ));
 
