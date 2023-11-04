@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Products from "./products.json";
 
-const listItems = (ProductsCategory) => {
-    return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
-        {
-            ProductsCategory.map((el) => (
-                <div className="col" key={el.id}>
-                    <div className="card">
-                        <img className="card-img-top p-4" src={el.image}></img>
-                        <div className="card-body">
-                            <h5 className="card-title">{el.title}</h5>
-                            <p className="card-text">${el.price}</p>
-                            <p className="card-text">{el.description}</p>
-                        </div>
-                    </div>
-                    <div className="border bg-body-secondary d-flex justify-content-end">
-                        <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-outline-danger">-</button>
-                            <button type="button" className="btn btn-outline-success">+</button>
-                        </div>
-                    </div>
-                </div>
-            ))
-        }
-    </div>
-}
-
 const Browse = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
@@ -66,6 +41,32 @@ const Browse = () => {
     function howManyofThis(id) {
         let hmot = cart.filter((cartItem) => cartItem.id === id);
         return hmot.length;
+    }
+
+    const listItems = (ProductsCategory) => {
+        return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
+            {
+                ProductsCategory.map((el) => (
+                    <div className="col" key={el.id}>
+                        <div className="card">
+                            <img className="card-img-top p-4" src={el.image}></img>
+                            <div className="card-body">
+                                <h5 className="card-title">{el.title}</h5>
+                                <p className="card-text">${el.price}</p>
+                                <p className="card-text">{el.description}</p>
+                                <div className="d-flex justify-content-between align-items-center bg-body-tertiary p-3">
+                                    <p>1</p>
+                                    <div className="btn-group" role="group">
+                                        <button type="button" className="btn btn-outline-danger" onClick={() => removeFromCart(el)}>-</button>
+                                        <button type="button" className="btn btn-outline-success" onClick={() => addToCart(el)}>+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
     }
 
     // const listItems = products.map((el) => (
