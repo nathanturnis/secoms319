@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Products from "./products.json";
 
 const Browse = () => {
+
+    const [pageState, setPageState] = useState(0);
+
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [query, setQuery] = useState('');
     const [ProductsCategory, setProductsCategory] = useState(Products);
-    console.log(ProductsCategory);
 
     useEffect(() => {
         total();
@@ -100,29 +102,65 @@ const Browse = () => {
 
     }
 
-    return (
-        <div>
+    if (pageState == 0) {
+        return (
             <div>
-                <nav className="navbar bg-body-tertiary">
-                    <div className="container-fluid">
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                        <button type="button" className="btn btn-primary">Checkout</button>
-                    </div>
-                </nav>
-            </div>
-            <div className="container">
                 <div>
-                    {listItems(ProductsCategory)}
+                    <nav className="navbar bg-body-tertiary">
+                        <div className="container-fluid">
+                            <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="button">Search</button>
+                            </form>
+                            <button type="button" className="btn btn-primary" onClick={() => setPageState(1)}>Checkout ({cart.length})</button>
+                        </div>
+                    </nav>
                 </div>
-                <div>Itesm in Cart :</div>
-                <div>{cartItems}</div>
-                <div>Order total to pay :{cartTotal}</div>
+                <div className="container mt-4 mb-4">
+                    <div>
+                        {listItems(ProductsCategory)}
+                    </div>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else if (pageState == 1) {
+        return (
+            <div>
+                <div>
+                    <nav className="navbar bg-body-tertiary">
+                        <div className="container-fluid">
+                            <button type="button" className="btn btn-primary" onClick={() => setPageState(0)}>Return</button>
+                        </div>
+                    </nav>
+                </div>
+
+                <div className="container">
+                    <div className="border mt-3" style={{ width: 60 + '%' }}>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" style={{ width: 30 + '%' }}><img src="./images/blackout-curtains-black.jpg" width={150}></img></th>
+                                    <td style={{ width: 35 + '%' }}>hi</td>
+                                    <td>hello</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>Itesm in Cart :</div>
+                    <div>{cartItems}</div>
+                    <div>Order total to pay :{cartTotal}</div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default Browse;
