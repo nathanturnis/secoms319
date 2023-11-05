@@ -161,15 +161,11 @@ const Browse = () => {
                                     <th scope="row"></th>
                                     <th></th>
                                     <th>Subtotal <br></br>Tax<br></br>Total</th>
-                                    <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${cartTotal + cartTotal * .06}</td>
+                                    <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div>Itesm in Cart :</div>
-                    <div>{cartItems}</div>
-                    <div>Order total to pay :{cartTotal}</div>
                 </div>
             </div>
         );
