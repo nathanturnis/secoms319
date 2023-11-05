@@ -77,7 +77,7 @@ const Browse = () => {
             <th scope="row" style={{ width: 30 + '%' }}><img src={el.image} width={150}></img></th>
             <th>{el.title}</th>
             <td>{howManyofThis(el.id)}</td>
-            <td>${el.price}</td>
+            <td>${el.price * howManyofThis(el.id)} (${el.price} x {howManyofThis(el.id)})</td>
         </tr>
 
     ));
@@ -157,6 +157,12 @@ const Browse = () => {
                             </thead>
                             <tbody>
                                 {listCartItems}
+                                <tr>
+                                    <th scope="row"></th>
+                                    <th></th>
+                                    <th>Subtotal <br></br>Tax<br></br>Total</th>
+                                    <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${cartTotal + cartTotal * .06}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
