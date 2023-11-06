@@ -120,6 +120,54 @@ const Browse = () => {
         });
     }
 
+    const isNumeric = (n) => {
+        return !isNaN(parseFloat(n)) && isFinite(n)
+    }
+
+    const cardInputDashes = (e) => {
+        e.value = e.value.replace(/-/g, '');
+        let newVal = '';
+        for (var i = 0, nums = 0; i < e.value.length; i++) {
+            if (nums != 0 && nums % 4 == 0) {
+                newVal += '-';
+            }
+            newVal += e.value[i]
+            if (isNumeric(e.value[i])) {
+                nums++;
+            }
+        }
+        e.value = newVal;
+    }
+
+    const validate = (e) => {
+        let nameInput = document.getElementById("inputName");
+        let emailInput = document.getElementById("inputEmail4");
+        let cardInput = document.getElementById("inputCard");
+
+        //validate name
+        if (name.length <= 0) {
+            nameInput.setAttribute("class", "form-control is-invalid");
+        } else {
+            nameInput.setAttribute("class", "form-control is-valid")
+        }
+
+        //validate email
+        if (!email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )) {
+            emailInput.setAttribute("class", "form-control is-invalid");
+        } else {
+            emailInput.setAttribute("class", "form-control is-valid");
+        }
+
+        if (!card.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
+            cardInput.setAttribute("class", "form-control is-invalid");
+        } else {
+            cardInput.setAttribute("class", "form-control is-valid")
+        }
+
+
+    }
+
 
 
     if (pageState == 0) {
@@ -206,7 +254,7 @@ const Browse = () => {
                                     placeholder="XXXX-XXXX-XXXX-XXXX"
                                     aria-label="Username"
                                     aria-describedby="basic-addon1"
-                                    onChange={(e) => setCard(e.target.value)} />
+                                    onChange={(e) => { setCard(e.target.value); cardInputDashes(e.target); }} />
                                 <div className="valid-feedback">Looks good!</div>
                                 <div className="invalid-feedback">
                                     Must be like, "7777-7777-7777-7777"
@@ -246,7 +294,7 @@ const Browse = () => {
                             <input type="text" className="form-control" id="inputZip" onChange={(e) => { setZipCode(e.target.value) }} />
                         </div>
                         <div className="col-12">
-                            <button type="submit" className="btn btn-success">
+                            <button type="button" className="btn btn-success" onClick={(e) => { validate(e); }}>
                                 <i className="bi-bag-check"></i> Order
                             </button>
                         </div>
