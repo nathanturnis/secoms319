@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Products from "./products.json";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const Browse = () => {
 
@@ -18,6 +20,8 @@ const Browse = () => {
     const [zipCode, setZipCode] = useState("");
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
+
+
 
     useEffect(() => {
         total();
@@ -140,6 +144,7 @@ const Browse = () => {
     }
 
     const validate = (e) => {
+        let isValidated = true;
         let nameInput = document.getElementById("inputName");
         let emailInput = document.getElementById("inputEmail4");
         let cardInput = document.getElementById("inputCard");
@@ -147,25 +152,35 @@ const Browse = () => {
         //validate name
         if (name.length <= 0) {
             nameInput.setAttribute("class", "form-control is-invalid");
+            isValidated = false;
         } else {
             nameInput.setAttribute("class", "form-control is-valid")
+            isValidated = true;
         }
 
         //validate email
         if (!email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )) {
             emailInput.setAttribute("class", "form-control is-invalid");
+            isValidated = false;
         } else {
             emailInput.setAttribute("class", "form-control is-valid");
+            isValidated = true;
         }
 
+        //validate card
         if (!card.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
             cardInput.setAttribute("class", "form-control is-invalid");
+            isValidated = false;
         } else {
             cardInput.setAttribute("class", "form-control is-valid")
+            isValidated = true;
         }
 
-
+        //open modal if validated
+        if (isValidated) {
+            // document.getElementById("staticBackdrop").setAttribute("class", 'show');
+        }
 
 
     }
@@ -304,18 +319,46 @@ const Browse = () => {
                         </div>
                     </form>
 
-                    <div className="card collapse" style={{ width: 18 + '18rem' }}>
-                        <div className="card-body">
-                            <h5 className="card-title">Order summary</h5>
-                            <p className="card-text">Here is a summary of your order.</p>
+                    <div class="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" style={{ display: 'block' }}>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                            </div>
                         </div>
-                        <ul className="list-group list-group-flush"></ul>
-                        <a href="" onClick="location.reload()" className="btn btn-secondary">
-                            <i className="bi-arrow-left-circle"></i> Return</a>
-
                     </div>
+                    {/* <Modal
+                        show={show}
+                        //  onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal title</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            I will not close if you click outside me. Don not even try to press
+                            escape key.
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary">
+                                Close
+                            </Button>
+                            <Button variant="primary">Understood</Button>
+                        </Modal.Footer>
+                    </Modal> */}
 
                 </div>
+
             </div>
         );
     }
