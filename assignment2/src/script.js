@@ -11,6 +11,14 @@ const Browse = () => {
     const [query, setQuery] = useState('');
     const [ProductsCategory, setProductsCategory] = useState(Products);
 
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [creditCard, setCreditCard] = useState("");
+    const [address, setAddress] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [state, setState] = useState("");
+    const [city, setCity] = useState("");
+
     useEffect(() => {
         total();
     }, [cart]);
@@ -112,6 +120,8 @@ const Browse = () => {
         });
     }
 
+
+
     if (pageState == 0) {
         return (
             <div>
@@ -166,6 +176,92 @@ const Browse = () => {
                             </tbody>
                         </table>
                     </div>
+
+                    <div id="liveAlertPlaceholder"></div>
+
+                    <form className="row g-3" id="checkout-form">
+                        <div className="col-md-6">
+                            <label for="inputName" className="form-label">Full Name</label>
+                            <input type="text" className="form-control" id="inputName" />
+                            <div className="valid-feedback">Looks good!</div>
+                            <div className="invalid-feedback">Must be like, "John Doe"</div>
+                        </div>
+
+                        <div className="col-md-6">
+                            <label for="inputEmail4" className="form-label">Email</label>
+                            <input type="email" className="form-control" id="inputEmail4" />
+                            <div className="valid-feedback">Looks good!</div>
+                            <div className="invalid-feedback">Must be like, "abc@xyz.efg"</div>
+                        </div>
+
+                        <div className="col-12">
+                            <label for="inputCard" className="form-label">Card</label>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text" id="basic-addon1"
+                                ><i className="bi-credit-card-fill"></i></span>
+                                <input
+                                    type="text"
+                                    id="inputCard"
+                                    className="form-control"
+                                    placeholder="XXXX-XXXX-XXXX-XXXX"
+                                    aria-label="Username"
+                                    aria-describedby="basic-addon1" />
+                                <div className="valid-feedback">Looks good!</div>
+                                <div className="invalid-feedback">
+                                    Must be like, "7777-7777-7777-7777"
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-12">
+                            <label for="inputAddress" className="form-label">Address</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="inputAddress"
+                                placeholder="1234 Main St" />
+                        </div>
+                        <div className="col-12">
+                            <label for="inputAddress2" className="form-label">Address 2</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="inputAddress2"
+                                placeholder="Apartment, studio, or floor" />
+                        </div>
+                        <div className="col-md-6">
+                            <label for="inputCity" className="form-label">City</label>
+                            <input type="text" className="form-control" id="inputCity" />
+                        </div>
+                        <div className="col-md-4">
+                            <label for="inputState" className="form-label">State</label>
+                            <select id="inputState" className="form-select">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div className="col-md-2">
+                            <label for="inputZip" className="form-label">Zip</label>
+                            <input type="text" className="form-control" id="inputZip" />
+                        </div>
+                        <div className="col-12">
+                            <button type="submit" className="btn btn-success">
+                                <i className="bi-bag-check"></i> Order
+                            </button>
+                        </div>
+                    </form>
+
+                    <div className="card collapse" style={{ width: 18 + '18rem' }}>
+                        <div className="card-body">
+                            <h5 className="card-title">Order summary</h5>
+                            <p className="card-text">Here is a summary of your order.</p>
+                        </div>
+                        <ul className="list-group list-group-flush"></ul>
+                        <a href="" onClick="location.reload()" className="btn btn-secondary">
+                            <i className="bi-arrow-left-circle"></i> Return</a>
+
+                    </div>
+
                 </div>
             </div>
         );
