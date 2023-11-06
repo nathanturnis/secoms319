@@ -166,6 +166,8 @@ const Browse = () => {
         }
 
 
+
+
     }
 
 
@@ -225,9 +227,11 @@ const Browse = () => {
                         </table>
                     </div>
 
+                    <h2 className="mt-3 mb-3">Payment Information</h2>
+
                     <div id="liveAlertPlaceholder"></div>
 
-                    <form className="row g-3" id="checkout-form">
+                    <form className="row g-3 mb-5" id="checkout-form">
                         <div className="col-md-6">
                             <label for="inputName" className="form-label">Full Name</label>
                             <input type="text" className="form-control" id="inputName" onChange={(e) => { setName(e.target.value) }} />
