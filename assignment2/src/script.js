@@ -13,7 +13,7 @@ const Browse = () => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [creditCard, setCreditCard] = useState("");
+    const [card, setCard] = useState("");
     const [address, setAddress] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [state, setState] = useState("");
@@ -182,14 +182,14 @@ const Browse = () => {
                     <form className="row g-3" id="checkout-form">
                         <div className="col-md-6">
                             <label for="inputName" className="form-label">Full Name</label>
-                            <input type="text" className="form-control" id="inputName" />
+                            <input type="text" className="form-control" id="inputName" onChange={(e) => { setName(e.target.value) }} />
                             <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">Must be like, "John Doe"</div>
                         </div>
 
                         <div className="col-md-6">
                             <label for="inputEmail4" className="form-label">Email</label>
-                            <input type="email" className="form-control" id="inputEmail4" />
+                            <input type="email" className="form-control" id="inputEmail4" onChange={(e) => { setEmail(e.target.value) }} />
                             <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">Must be like, "abc@xyz.efg"</div>
                         </div>
@@ -205,7 +205,8 @@ const Browse = () => {
                                     className="form-control"
                                     placeholder="XXXX-XXXX-XXXX-XXXX"
                                     aria-label="Username"
-                                    aria-describedby="basic-addon1" />
+                                    aria-describedby="basic-addon1"
+                                    onChange={(e) => setCard(e.target.value)} />
                                 <div className="valid-feedback">Looks good!</div>
                                 <div className="invalid-feedback">
                                     Must be like, "7777-7777-7777-7777"
@@ -219,7 +220,7 @@ const Browse = () => {
                                 type="text"
                                 className="form-control"
                                 id="inputAddress"
-                                placeholder="1234 Main St" />
+                                placeholder="1234 Main St" onChange={(e) => { setAddress(e.target.value) }} />
                         </div>
                         <div className="col-12">
                             <label for="inputAddress2" className="form-label">Address 2</label>
@@ -231,18 +232,18 @@ const Browse = () => {
                         </div>
                         <div className="col-md-6">
                             <label for="inputCity" className="form-label">City</label>
-                            <input type="text" className="form-control" id="inputCity" />
+                            <input type="text" className="form-control" id="inputCity" onChange={(e) => { setCity(e.target.value) }} />
                         </div>
                         <div className="col-md-4">
                             <label for="inputState" className="form-label">State</label>
-                            <select id="inputState" className="form-select">
+                            <select id="inputState" className="form-select" onSelect={(e) => { setState(e.target.value) }}>
                                 <option selected>Choose...</option>
                                 <option>...</option>
                             </select>
                         </div>
                         <div className="col-md-2">
                             <label for="inputZip" className="form-label">Zip</label>
-                            <input type="text" className="form-control" id="inputZip" />
+                            <input type="text" className="form-control" id="inputZip" onChange={(e) => { setZipCode(e.target.value) }} />
                         </div>
                         <div className="col-12">
                             <button type="submit" className="btn btn-success">
