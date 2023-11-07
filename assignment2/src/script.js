@@ -56,9 +56,11 @@ const Browse = () => {
         return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
             {
                 ProductsCategory.map((el) => (
-                    <div className="col" key={el.id}>
-                        <div className="card">
-                            <img className="card-img-top p-4" src={el.image}></img>
+                    <div className="col d-flex align-items-stretch" key={el.id}>
+                        <div className="card mb-4">
+                            <div className="text-center" style={{ height: 200 + 'px' }}>
+                                <img className="img-fluid p-4" src={el.image} style={{ maxHeight: 100 + '%' }}></img>
+                            </div>
                             <div className="card-body">
                                 <h5 className="card-title">{el.title}</h5>
                                 <p className="card-text">${el.price}</p>
@@ -286,6 +288,7 @@ const Browse = () => {
                                     placeholder="XXXX-XXXX-XXXX-XXXX"
                                     aria-label="Username"
                                     aria-describedby="basic-addon1"
+                                    maxLength={19}
                                     onChange={(e) => { setCard(e.target.value); cardInputDashes(e.target); }} />
                                 <div className="valid-feedback">Looks good!</div>
                                 <div className="invalid-feedback">
@@ -337,6 +340,7 @@ const Browse = () => {
             </div>
         );
     } else if (pageState == 2) {
+        window.scrollTo(0, 0);
         return (
             <div>
 
