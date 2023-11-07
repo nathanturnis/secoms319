@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Products from "./products.json";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 const Browse = () => {
 
@@ -59,6 +57,12 @@ const Browse = () => {
     }
 
     const listItems = (ProductsCategory) => {
+
+        let alert = document.getElementById("alertCart");
+        if (alert != null) {
+            alert.remove();
+        }
+
         return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
             {
                 ProductsCategory.map((el) => (
@@ -149,6 +153,11 @@ const Browse = () => {
         let emailInput = document.getElementById("inputEmail4");
         let cardInput = document.getElementById("inputCard");
 
+        if (cartTotal <= 0) {
+            document.getElementById("cartAlert").innerHTML = `<div class="alert alert-danger" role="alert" id="alertCart">No items in the cart!</div>`;
+            return;
+        }
+
         //validate name
         if (name.length <= 0) {
             nameInput.setAttribute("class", "form-control is-invalid");
@@ -179,12 +188,25 @@ const Browse = () => {
 
         //open modal if validated
         if (isValidated) {
-            // document.getElementById("staticBackdrop").setAttribute("class", 'show');
+            setPageState(2);
         }
-
-
     }
 
+    const displayInformation = () => {
+        return (
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Name: {name}</li>
+                <li class="list-group-item">Email: {email}</li>
+                <li class="list-group-item">Card: XXXX-XXXX-XXXX-{card.slice(-4)}</li>
+                <li class="list-group-item">Address: {address}, {city}, {state} {zipCode}</li>
+            </ul>);
+    }
+
+    const resetPage = () => {
+        setCart([]);
+        setCartTotal(0);
+        setPageState(0);
+    }
 
 
     if (pageState == 0) {
@@ -220,6 +242,9 @@ const Browse = () => {
                 </div>
 
                 <div className="container">
+                    <div id="cartAlert">
+
+                    </div>
                     <div className="border mt-3" style={{ width: 60 + '%' }}>
                         <table className="table">
                             <thead>
@@ -236,15 +261,13 @@ const Browse = () => {
                                     <th scope="row"></th>
                                     <th></th>
                                     <th>Subtotal <br></br>Tax<br></br>Total</th>
-                                    <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
+                                    <td>${(cartTotal).toFixed(2)}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h2 className="mt-3 mb-3">Payment Information</h2>
-
-                    <div id="liveAlertPlaceholder"></div>
 
                     <form className="row g-3 mb-5" id="checkout-form">
                         <div className="col-md-6">
@@ -303,8 +326,9 @@ const Browse = () => {
                         </div>
                         <div className="col-md-4">
                             <label for="inputState" className="form-label">State</label>
-                            <select id="inputState" className="form-select" onSelect={(e) => { setState(e.target.value) }}>
+                            <select id="inputState" className="form-select" onChange={(e) => { setState(e.target.value) }}>
                                 <option selected>Choose...</option>
+                                <option>Iowa</option>
                                 <option>...</option>
                             </select>
                         </div>
@@ -318,47 +342,48 @@ const Browse = () => {
                             </button>
                         </div>
                     </form>
-
-                    <div class="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" style={{ display: 'block' }}>
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <Modal
-                        show={show}
-                        //  onHide={handleClose}
-                        backdrop="static"
-                        keyboard={false}
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>Modal title</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            I will not close if you click outside me. Don not even try to press
-                            escape key.
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary">
-                                Close
-                            </Button>
-                            <Button variant="primary">Understood</Button>
-                        </Modal.Footer>
-                    </Modal> */}
-
                 </div>
 
+            </div>
+        );
+    } else if (pageState == 2) {
+        return (
+            <div>
+
+                <div className="container mt-3 mb-5">
+                    <div class="alert alert-success" role="alert">
+                        Order successful! Please review the order information below.
+                    </div>
+                    <h1>Order Summary</h1>
+
+                    <div className="border mt-3" style={{ width: 60 + '%' }}>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listCartItems}
+                                <tr>
+                                    <th scope="row"></th>
+                                    <th></th>
+                                    <th>Subtotal <br></br>Tax<br></br>Total</th>
+                                    <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="mt-4" style={{ maxWidth: 60 + '%' }}>
+                        <h3>Your Information</h3>
+                        {displayInformation()}
+                    </div>
+                    <button className="btn btn-primary mt-4" onClick={() => { resetPage() }}>Continue Shopping</button>
+                </div>
             </div>
         );
     }
