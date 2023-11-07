@@ -52,5 +52,23 @@
     "category": "kitchen",
     "image": "./images/trash-can-with-foot-pedal-50-liter.jpg",
     "rating": { "rate": 2.6, "count": 235 }
+  },
+  {
+    "id": 16,
+    "title": "Men's Regular-Fit Quick-Dry Golf Polo Shirt",
+    "price": 15.99,
+    "description": "A comfortable polo shirt for golfing.",
+    "category": "clothing",
+    "image": "./images/men-golf-polo-t-shirt-blue.jpg",
+    "rating": { "rate": 2.6, "count": 235 }
+  },
+  {
+    "id": 17,
+    "title": "Vanity Mirror with Heavy Base",
+    "price": 16.49,
+    "description": "The perfect size mirror for all your vanity needs. Has a wide degree of rotation.",
+    "category": "vanity",
+    "image": "./images/vanity-mirror-silver.jpg",
+    "rating": { "rate": 2.6, "count": 235 }
   }
 ]

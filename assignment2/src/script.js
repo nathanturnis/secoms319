@@ -19,8 +19,6 @@ const Browse = () => {
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
 
-
-
     useEffect(() => {
         total();
     }, [cart]);
@@ -42,14 +40,6 @@ const Browse = () => {
         hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
         setCart(hardCopy);
     };
-
-    const cartItems = cart.map((el) => (
-        <div key={el.id}>
-            <img className="img-fluid" src={el.image} width={150} />
-            {el.title}
-            ${el.price}
-        </div>
-    ));
 
     function howManyofThis(id) {
         let hmot = cart.filter((cartItem) => cartItem.id === id);
