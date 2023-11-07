@@ -156,7 +156,6 @@ const Browse = () => {
             isValidated = false;
         } else {
             nameInput.setAttribute("class", "form-control is-valid")
-            isValidated = true;
         }
 
         //validate email
@@ -166,7 +165,6 @@ const Browse = () => {
             isValidated = false;
         } else {
             emailInput.setAttribute("class", "form-control is-valid");
-            isValidated = true;
         }
 
         //validate card
@@ -175,7 +173,6 @@ const Browse = () => {
             isValidated = false;
         } else {
             cardInput.setAttribute("class", "form-control is-valid")
-            isValidated = true;
         }
 
         //open modal if validated
@@ -198,6 +195,13 @@ const Browse = () => {
         setCart([]);
         setCartTotal(0);
         setPageState(0);
+        setName("");
+        setEmail("");
+        setCard("");
+        setAddress("");
+        setCity("");
+        setState("");
+        setZipCode("");
     }
 
 
