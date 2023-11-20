@@ -1,0 +1,13 @@
+#cart-counter {
+  position: relative;
+  top: 7px;
+  right: 20px;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+}
+
+#product-search {
+  max-width: 700px;
+  width: 100%;
+}
