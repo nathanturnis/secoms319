@@ -1,12 +1,53 @@
-
+import React, { useState, useEffect } from "react";
 
 function App() {
 
-  fetch("http://localhost:8081/allProducts")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  const [Products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+
+  const getProducts = () => {
+    fetch("http://localhost:8081/allProducts")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProducts(data);
+      });
+  };
+
+  const listProducts = Products.map((el) => (
+
+    <div className="col d-flex flex-column">
+      <div className="card">
+        <div
+          className="mb-1 p-3 d-flex justify-content-center align-items-center" id="product-card">
+          <img
+            src={`http://localhost:8081/${el.image}`}
+            className="img-fluid"
+            id="product-image" />
+        </div>
+        <div className="overflow-hidden px-3 mt-2" id="product-name">
+          {el.name}
+        </div>
+        <div className="mb-3 px-3 d-flex">
+          {/* <img
+            src="./${starsImage}"
+            className="img-fluid"
+            style="width: 100px; height: fit-content; margin-top: 2px" /> */}
+          <div className="ms-1">{el.rating.count}</div>
+        </div>
+        <div className="mb-2 px-3 fw-bold">${el.price}</div>
+        <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
+          <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}" onclick="addToCart(this)">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  ));
 
   return (
     <div data-bs-theme="dark">
@@ -45,6 +86,12 @@ function App() {
           </div>
         </div>
       </nav >
+
+      <div className="container" data-bs-theme="light">
+        <div
+          className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-5 mb-5"
+          id="products-grid">{listProducts}</div>
+      </div>
     </div >
   );
 }

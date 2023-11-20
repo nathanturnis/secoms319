@@ -11,8 +11,10 @@ const dbName = "se319final";
 const client = new MongoClient(url);
 const db = client.db(dbName);
 
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.static("public"));
+app.use("/images/products", express.static("images/products"));
 
 const port = "8081";
 const host = "localhost";
