@@ -28,7 +28,8 @@ app.get("/allProducts", async (req, res) => {
     const results = await db
         .collection("products")
         .find(query)
-        .limit(100);
+        .limit(100)
+        .toArray();
     console.log(results);
     res.status(200);
     res.send(results);

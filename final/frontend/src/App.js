@@ -1,6 +1,13 @@
 
 
 function App() {
+
+  fetch("http://localhost:8081/allProducts")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+
   return (
     <div data-bs-theme="dark">
       <nav className="navbar navbar-expand-md bg-body-tertiary">
