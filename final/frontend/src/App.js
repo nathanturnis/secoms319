@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 function App() {
 
   const [Products, setProducts] = useState([]);
+  const [FilteredProducts, setFilteredProducts] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     getProducts();
@@ -15,39 +17,56 @@ function App() {
       .then((data) => {
         console.log(data);
         setProducts(data);
+        setFilteredProducts(data);
       });
   };
 
-  const listProducts = Products.map((el) => (
+  const listProducts = (FilteredProducts) => {
+    return <div
+      className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-5 mb-5"
+      id="products-grid"> {
 
-    <div className="col d-flex flex-column">
-      <div className="card">
-        <div
-          className="mb-1 p-3 d-flex justify-content-center align-items-center" id="product-card">
-          <img
-            src={`http://localhost:8081/${el.image}`}
-            className="img-fluid"
-            id="product-image" />
-        </div>
-        <div className="overflow-hidden px-3 mt-2" id="product-name">
-          {el.name}
-        </div>
-        <div className="mb-3 px-3 d-flex">
-          <img
-            src={`http://localhost:8081/images/ratings/rating-${el.rating.stars * 10}.png`}
-            className="img-fluid"
-            id="product-rating-image" />
-          <div className="ms-1">{el.rating.count}</div>
-        </div>
-        <div className="mb-2 px-3 fw-bold">${el.price}</div>
-        <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-          <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}" onclick="addToCart(this)">
-            Add To Cart
-          </button>
-        </div>
-      </div>
+        FilteredProducts.map((el) => (
+          <div className="col d-flex flex-column">
+            <div className="card">
+              <div
+                className="mb-1 p-3 d-flex justify-content-center align-items-center" id="product-card">
+                <img
+                  src={`http://localhost:8081/${el.image}`}
+                  className="img-fluid"
+                  id="product-image" />
+              </div>
+              <div className="overflow-hidden px-3 mt-2" id="product-name">
+                {el.name}
+              </div>
+              <div className="mb-3 px-3 d-flex">
+                <img
+                  src={`http://localhost:8081/images/ratings/rating-${el.rating.stars * 10}.png`}
+                  className="img-fluid"
+                  id="product-rating-image" />
+                <div className="ms-1">{el.rating.count}</div>
+              </div>
+              <div className="mb-2 px-3 fw-bold">${el.price}</div>
+              <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
+                <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}" onclick="addToCart(this)">
+                  Add To Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
-  ));
+  }
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    const results = Products.filter(eachProduct => {
+      if (e.target.value === "") return Products;
+      return eachProduct.name.toLowerCase().includes(e.target.value.toLowerCase())
+    })
+    setFilteredProducts(results);
+  }
 
   return (
     <div data-bs-theme="dark">
@@ -76,7 +95,7 @@ function App() {
               </li>
             </ul>
             <form className="d-flex" role="search" id="product-search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
               <button className="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div className="d-flex">
@@ -88,9 +107,7 @@ function App() {
       </nav >
 
       <div className="container" data-bs-theme="light">
-        <div
-          className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-5 mb-5"
-          id="products-grid">{listProducts}</div>
+        {listProducts(FilteredProducts)}
       </div>
     </div >
   );
