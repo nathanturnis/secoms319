@@ -23,3 +23,9 @@
 #product-card {
   height: 200px;
 }
+
+#product-rating-image {
+  width: 100px;
+  height: fit-content;
+  margin-top: 2px;
+}

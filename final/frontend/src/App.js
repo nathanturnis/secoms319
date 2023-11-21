@@ -33,10 +33,10 @@ function App() {
           {el.name}
         </div>
         <div className="mb-3 px-3 d-flex">
-          {/* <img
-            src="./${starsImage}"
+          <img
+            src={`http://localhost:8081/images/ratings/rating-${el.rating.stars * 10}.png`}
             className="img-fluid"
-            style="width: 100px; height: fit-content; margin-top: 2px" /> */}
+            id="product-rating-image" />
           <div className="ms-1">{el.rating.count}</div>
         </div>
         <div className="mb-2 px-3 fw-bold">${el.price}</div>
