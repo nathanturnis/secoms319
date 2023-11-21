@@ -29,3 +29,40 @@
   height: fit-content;
   margin-top: 2px;
 }
+
+.thank-you {
+  margin-top: 200px;
+  text-align: center;
+  background: linear-gradient(to bottom, #e1ca19 0%, #e8013b 100%);
+  animation-name: spinX;
+  animation-duration: 1000ms;
+}
+
+.text-cool {
+  width: fit-content;
+  font-size: large;
+  animation-name: spinY;
+  animation-duration: 1500ms;
+}
+
+@keyframes spinX {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes spinY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.nav-link:hover {
+  cursor: pointer;
+}

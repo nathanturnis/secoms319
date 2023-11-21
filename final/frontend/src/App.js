@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 
+  const [pageState, setPageState] = useState(0);
+
   const [Products, setProducts] = useState([]);
   const [FilteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState('');
@@ -68,49 +70,112 @@ function App() {
     setFilteredProducts(results);
   }
 
-  return (
-    <div data-bs-theme="dark">
-      <nav className="navbar navbar-expand-md bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand">Sahara</a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-between"
-            id="navbarNavDropdown">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active">Browse</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link">Listings</a>
-              </li>
-              <li className="navbar-item">
-                <a className="nav-link">About</a>
-              </li>
-            </ul>
-            <form className="d-flex" role="search" id="product-search">
-              <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <div className="d-flex">
-              <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
-              <div id="cart-counter">0</div>
+  //PRODUCTS PAGE
+  if (pageState == 0) {
+    return (
+      <div data-bs-theme="dark">
+        <nav className="navbar navbar-expand-md bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand">Sahara</a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarNavDropdown">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link active">Browse</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Listings</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
+                </li>
+              </ul>
+              <form className="d-flex" role="search" id="product-search">
+                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
+                <button className="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div className="d-flex">
+                <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
+                <div id="cart-counter">0</div>
+              </div>
             </div>
           </div>
-        </div>
-      </nav >
+        </nav >
 
-      <div className="container" data-bs-theme="light">
-        {listProducts(FilteredProducts)}
+        <div className="container" data-bs-theme="light">
+          {listProducts(FilteredProducts)}
+        </div>
+      </div >
+    );
+
+    //ABOUT PAGE
+  } else if (pageState == 1) {
+    return (
+      <div data-bs-theme="dark">
+        <nav className="navbar navbar-expand-md bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand">Sahara</a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarNavDropdown">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Listings</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link active" onClick={() => { setPageState(1) }}>About</a>
+                </li>
+              </ul>
+              <form className="d-flex" role="search" id="product-search">
+                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
+                <button className="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div className="d-flex">
+                <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
+                <div id="cart-counter">0</div>
+              </div>
+            </div>
+          </div>
+        </nav >
+
+        <div class="container">
+          <div class="mt-3 border-bottom border-black">
+            <h1>About The Developers</h1>
+          </div>
+          <div class="mt-3">
+            <h4>SE/ComS319 Construction of User Interfaces, Fall 2023</h4>
+            <h5>Date: 11/28/23</h5>
+          </div>
+          <div class="mt-5">
+            <h3>Authors:</h3>
+            <p class="text-cool">Nathan Turnis - nturnis@iastate.edu</p>
+            <p class="text-cool">Ella Knott - edknott@iastate.edu</p>
+          </div>
+          <div class="thank-you p-5 rounded-3">
+            <h1>Thanks for checking out our site!</h1>
+          </div>
+        </div>
       </div>
-    </div >
-  );
+    )
+  }
 }
 
 export default App;
