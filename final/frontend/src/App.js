@@ -25,7 +25,7 @@ function App() {
 
   const listProducts = (FilteredProducts) => {
     return <div
-      className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-5 mb-5"
+      className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-3 mb-5"
       id="products-grid"> {
 
         FilteredProducts.map((el) => (
@@ -111,6 +111,13 @@ function App() {
         </nav >
 
         <div className="container" data-bs-theme="light">
+          <div className="mt-3">
+            <select className="form-select" id="category-select">
+              <option selected>Categories</option>
+              <option value="clothing">Clothing</option>
+            </select>
+          </div>
+
           {listProducts(FilteredProducts)}
         </div>
       </div >

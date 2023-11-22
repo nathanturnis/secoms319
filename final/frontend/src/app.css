@@ -30,6 +30,11 @@
   margin-top: 2px;
 }
 
+#category-select {
+  width: 300px;
+  max-width: 50%;
+}
+
 .thank-you {
   margin-top: 200px;
   text-align: center;
