@@ -70,6 +70,16 @@ function App() {
     setFilteredProducts(results);
   }
 
+  const handleCategoryChange = (e) => {
+    // console.log(e.target.value);
+    if (e.target.value === "") {
+      setFilteredProducts(Products);
+      return;
+    }
+    let filtred = Products.filter(item => item.category === e.target.value);
+    setFilteredProducts(filtred);
+  }
+
   //PRODUCTS PAGE
   if (pageState == 0) {
     return (
@@ -112,9 +122,12 @@ function App() {
 
         <div className="container" data-bs-theme="light">
           <div className="mt-3">
-            <select className="form-select" id="category-select">
-              <option selected>Categories</option>
-              <option value="clothing">Clothing</option>
+            <select className="form-select" id="category-select" onChange={handleCategoryChange}>
+              <option selected value="">Categories</option>
+              <option value="clothing" >Clothing</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bathroom">Bathroom</option>
+              <option value="bedroom">Bedroom</option>
             </select>
           </div>
 
