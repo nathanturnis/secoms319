@@ -74,10 +74,16 @@ function App() {
     // console.log(e.target.value);
     if (e.target.value === "") {
       setFilteredProducts(Products);
+      document.getElementById("category-text").innerHTML = "";
+      document.getElementById("selected-category").classList.remove("visible");
+      document.getElementById("selected-category").classList.add("invisible");
       return;
     }
     let filtred = Products.filter(item => item.category === e.target.value);
     setFilteredProducts(filtred);
+    document.getElementById("category-text").innerHTML = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+    document.getElementById("selected-category").classList.remove("invisible");
+    document.getElementById("selected-category").classList.add("visible");
   }
 
   //PRODUCTS PAGE
@@ -121,19 +127,25 @@ function App() {
         </nav >
 
         <div className="container" data-bs-theme="light">
-          <div className="mt-3">
-            <select className="form-select border border-2 border-dark focus-ring focus-ring-dark rounded-pill"
-              id="category-select" onChange={handleCategoryChange}>
-              <option selected value="">Categories</option>
-              <option value="clothing" >Clothing</option>
-              <option value="sunglasses">Sunglasses</option>
-              <option value="kitchen">Kitchen</option>
-              <option value="bathroom">Bathroom</option>
-              <option value="bedroom">Bedroom</option>
-              <option value="vanity">Vanity</option>
-              <option value="health">Health</option>
-              <option value="toys">Toys</option>
-            </select>
+          <div className="mt-3 d-flex">
+            <div id="category-select">
+              <select className="form-select border border-2 border-dark focus-ring focus-ring-dark rounded-pill"
+                onChange={handleCategoryChange}>
+                <option selected value="">Categories</option>
+                <option value="clothing" >Clothing</option>
+                <option value="sunglasses">Sunglasses</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="bathroom">Bathroom</option>
+                <option value="bedroom">Bedroom</option>
+                <option value="vanity">Vanity</option>
+                <option value="health">Health</option>
+                <option value="toys">Toys</option>
+              </select>
+            </div>
+            <div className="ms-3 fs-6 border border-2 border-dark rounded-pill p-1 d-flex invisible" id="selected-category">
+              <div id="category-text"></div>
+              <button type="button" className="btn-close"></button>
+            </div>
           </div>
 
           {listProducts(FilteredProducts)}
