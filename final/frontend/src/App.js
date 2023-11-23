@@ -122,13 +122,17 @@ function App() {
 
         <div className="container" data-bs-theme="light">
           <div className="mt-3">
-            <select className="form-select" id="category-select" onChange={handleCategoryChange}>
+            <select className="form-select border border-2 border-dark focus-ring focus-ring-dark rounded-pill"
+              id="category-select" onChange={handleCategoryChange}>
               <option selected value="">Categories</option>
               <option value="clothing" >Clothing</option>
+              <option value="sunglasses">Sunglasses</option>
               <option value="kitchen">Kitchen</option>
               <option value="bathroom">Bathroom</option>
               <option value="bedroom">Bedroom</option>
               <option value="vanity">Vanity</option>
+              <option value="health">Health</option>
+              <option value="toys">Toys</option>
             </select>
           </div>
 
