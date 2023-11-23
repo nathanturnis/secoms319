@@ -128,6 +128,7 @@ function App() {
               <option value="kitchen">Kitchen</option>
               <option value="bathroom">Bathroom</option>
               <option value="bedroom">Bedroom</option>
+              <option value="vanity">Vanity</option>
             </select>
           </div>
 
