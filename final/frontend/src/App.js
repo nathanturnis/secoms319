@@ -38,9 +38,11 @@ function App() {
   }
 
   const removeFromCart = (el) => {
+    console.log(el);
     let hardCopy = [...cart];
     hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
     setCart(hardCopy);
+    filterCart();
   };
 
   const getProducts = () => {
@@ -92,13 +94,16 @@ function App() {
   }
 
   const listCartItems = filteredCart.map((el) => (
-    <tr>
+    <tr key={el.id}>
       <th scope="row" style={{ width: 30 + '%' }}>
         <div className="me-5 mt-2 mb-2" style={{ textAlign: 'center' }}>
           <img className="img-fluid" id="cart-image" src={`http://localhost:8081/${el.image}`}></img>
         </div>
       </th>
-      <th>{el.name}</th>
+      <th>
+        <div>{el.name}</div>
+        <div className="fw-normal mt-1"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" onClick={() => { removeFromCart(el) }}>Remove</a></div>
+      </th>
       <td>{howManyofThis(el.id)}</td>
       <td>${el.price * howManyofThis(el.id)} (${el.price} x {howManyofThis(el.id)})</td>
     </tr>
@@ -114,7 +119,6 @@ function App() {
       for (let i = 0; i < Products.length; i++) {
         for (let j = 0; j < cart.length; j++) {
           if (Products[i].id === cart[j].id) {
-            console.log(Products[i]);
             newFilteredCart = [...newFilteredCart, Products[i]];
             break;
           }
