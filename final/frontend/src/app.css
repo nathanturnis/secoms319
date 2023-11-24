@@ -76,6 +76,10 @@
   cursor: pointer;
 }
 
+#cart-image {
+  height: 120px;
+}
+
 [data-bs-theme="dark"] .btn-close {
   filter: none !important; /* Resetting the filter */
 }

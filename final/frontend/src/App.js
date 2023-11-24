@@ -93,7 +93,11 @@ function App() {
 
   const listCartItems = filteredCart.map((el) => (
     <tr>
-      <th scope="row" style={{ width: 30 + '%' }}><img src={`http://localhost:8081/${el.image}`} width={150}></img></th>
+      <th scope="row" style={{ width: 30 + '%' }}>
+        <div className="me-5 mt-2 mb-2" style={{ textAlign: 'center' }}>
+          <img className="img-fluid" id="cart-image" src={`http://localhost:8081/${el.image}`}></img>
+        </div>
+      </th>
       <th>{el.name}</th>
       <td>{howManyofThis(el.id)}</td>
       <td>${el.price * howManyofThis(el.id)} (${el.price} x {howManyofThis(el.id)})</td>
