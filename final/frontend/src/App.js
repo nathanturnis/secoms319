@@ -128,7 +128,7 @@ function App() {
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success invisible" type="submit">Search</button>
               </form>
-              <div className="d-flex">
+              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
                 <div id="cart-counter">0</div>
               </div>
@@ -195,7 +195,7 @@ function App() {
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success" type="submit">Search</button>
               </form>
-              <div className="d-flex">
+              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
                 <div id="cart-counter">0</div>
               </div>
@@ -222,9 +222,50 @@ function App() {
         </div>
       </div>
     )
-  } else if (pageState == 5) {
+  } else if (pageState == 2) {
     return (
-      <div>Hello</div>
+      <div data-bs-theme="dark">
+        <nav className="navbar navbar-expand-md bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand">Sahara</a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarNavDropdown">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Listings</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
+                </li>
+              </ul>
+              <form className="d-flex invisible" role="search" id="product-search">
+                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
+                <button className="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
+                <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
+                <div id="cart-counter">0</div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div className="container">
+          <h1 className="mt-4">Cart</h1>
+        </div>
+
+      </div>
     )
   }
 }

@@ -72,6 +72,10 @@
   cursor: pointer;
 }
 
+#cart-div:hover {
+  cursor: pointer;
+}
+
 [data-bs-theme="dark"] .btn-close {
   filter: none !important; /* Resetting the filter */
 }
