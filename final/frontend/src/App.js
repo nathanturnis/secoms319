@@ -126,7 +126,7 @@ function App() {
               </ul>
               <form className="d-flex" role="search" id="product-search">
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
-                <button className="btn btn-outline-success" type="submit">Search</button>
+                <button className="btn btn-outline-success invisible" type="submit">Search</button>
               </form>
               <div className="d-flex">
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
@@ -191,7 +191,7 @@ function App() {
                   <a className="nav-link active" onClick={() => { setPageState(1) }}>About</a>
                 </li>
               </ul>
-              <form className="d-flex" role="search" id="product-search">
+              <form className="d-flex invisible" role="search" id="product-search">
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success" type="submit">Search</button>
               </form>
