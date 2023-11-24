@@ -84,6 +84,15 @@ function App() {
     document.getElementById("category-text").innerHTML = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     document.getElementById("selected-category").classList.remove("invisible");
     document.getElementById("selected-category").classList.add("visible");
+    document.getElementById("category-select").firstChild.value = "";
+  }
+
+  const removeCategory = () => {
+    setFilteredProducts(Products);
+    document.getElementById("category-text").innerHTML = "";
+    document.getElementById("selected-category").classList.remove("visible");
+    document.getElementById("selected-category").classList.add("invisible");
+    document.getElementById("category-select").firstChild.value = "";
   }
 
   //PRODUCTS PAGE
@@ -144,7 +153,7 @@ function App() {
             </div>
             <div className="ms-3 fs-6 border border-2 border-dark rounded-pill p-1 d-flex invisible" id="selected-category">
               <div id="category-text"></div>
-              <button type="button" className="btn-close"></button>
+              <button type="button" className="btn-close" onClick={removeCategory}></button>
             </div>
           </div>
 
