@@ -63,6 +63,7 @@ function App() {
 
   const handleChange = (e) => {
     setQuery(e.target.value);
+    removeCategory();
     const results = Products.filter(eachProduct => {
       if (e.target.value === "") return Products;
       return eachProduct.name.toLowerCase().includes(e.target.value.toLowerCase())
@@ -151,9 +152,9 @@ function App() {
                 <option value="toys">Toys</option>
               </select>
             </div>
-            <div className="ms-3 fs-6 border border-2 border-dark rounded-pill p-1 d-flex invisible" id="selected-category">
-              <div id="category-text"></div>
-              <button type="button" className="btn-close" onClick={removeCategory}></button>
+            <div className="ms-3 fs-6 border border-2 border-dark rounded-pill d-flex invisible" id="selected-category">
+              <div className="ms-2 mt-1" id="category-text"></div>
+              <button type="button" className="btn-close ms-2 me-1 mt-1" onClick={removeCategory}></button>
             </div>
           </div>
 
