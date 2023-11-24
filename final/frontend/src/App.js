@@ -8,10 +8,40 @@ function App() {
   const [FilteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState('');
 
+  const [cartTotal, setCartTotal] = useState(0);
+  const [cart, setCart] = useState([]);
+  const [filteredCart, setFilteredCart] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    total();
+  }, [cart]);
+
+  const total = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalVal += cart[i].price;
+    }
+    setCartTotal(totalVal);
+  };
+
+  function howManyofThis(id) {
+    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    return hmot.length;
+  }
+
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+  }
+
+  const removeFromCart = (el) => {
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+    setCart(hardCopy);
+  };
 
   const getProducts = () => {
     fetch("http://localhost:8081/allProducts")
@@ -50,7 +80,7 @@ function App() {
               </div>
               <div className="mb-2 px-3 fw-bold">${el.price}</div>
               <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-                <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}">
+                <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}" onClick={() => addToCart(el)}>
                   Add To Cart
                 </button>
               </div>
@@ -59,6 +89,36 @@ function App() {
         ))
       }
     </div>
+  }
+
+  const listCartItems = filteredCart.map((el) => (
+    <tr>
+      <th scope="row" style={{ width: 30 + '%' }}><img src={`http://localhost:8081/${el.image}`} width={150}></img></th>
+      <th>{el.name}</th>
+      <td>{howManyofThis(el.id)}</td>
+      <td>${el.price * howManyofThis(el.id)} (${el.price} x {howManyofThis(el.id)})</td>
+    </tr>
+
+  ));
+
+  const filterCart = () => {
+
+    setFilteredCart((prevFilteredCart) => {
+      // Clear the previous filteredCart
+      let newFilteredCart = [];
+
+      for (let i = 0; i < Products.length; i++) {
+        for (let j = 0; j < cart.length; j++) {
+          if (Products[i].id === cart[j].id) {
+            console.log(Products[i]);
+            newFilteredCart = [...newFilteredCart, Products[i]];
+            break;
+          }
+        }
+      }
+
+      return newFilteredCart;
+    });
   }
 
   const handleChange = (e) => {
@@ -128,9 +188,9 @@ function App() {
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success invisible" type="submit">Search</button>
               </form>
-              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
+              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2); filterCart(); }}>
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
-                <div id="cart-counter">0</div>
+                <div id="cart-counter">{cart.length}</div>
               </div>
             </div>
           </div>
@@ -195,9 +255,9 @@ function App() {
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success" type="submit">Search</button>
               </form>
-              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
+              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2); filterCart(); }}>
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
-                <div id="cart-counter">0</div>
+                <div id="cart-counter">{cart.length}</div>
               </div>
             </div>
           </div>
@@ -222,10 +282,12 @@ function App() {
         </div>
       </div>
     )
+
+    //CART PAGE
   } else if (pageState == 2) {
     return (
-      <div data-bs-theme="dark">
-        <nav className="navbar navbar-expand-md bg-body-tertiary">
+      <div>
+        <nav className="navbar navbar-expand-md bg-body-tertiary " data-bs-theme="dark">
           <div className="container-fluid">
             <a className="navbar-brand">Sahara</a>
             <button
@@ -253,9 +315,9 @@ function App() {
                 <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
                 <button className="btn btn-outline-success" type="submit">Search</button>
               </form>
-              <div className="d-flex" id="cart-div" onClick={() => { setPageState(2) }}>
+              <div className="d-flex" id="cart-div">
                 <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
-                <div id="cart-counter">0</div>
+                <div id="cart-counter">{cart.length}</div>
               </div>
             </div>
           </div>
@@ -263,6 +325,28 @@ function App() {
 
         <div className="container">
           <h1 className="mt-4">Cart</h1>
+
+          <div className="border mt-3" style={{ width: 60 + '%' }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listCartItems}
+                <tr>
+                  <th scope="row"></th>
+                  <th></th>
+                  <th>Subtotal <br></br>Tax<br></br>Total</th>
+                  <td>${(cartTotal).toFixed(2)}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </div>
