@@ -29,7 +29,7 @@ function App() {
       id="products-grid"> {
 
         FilteredProducts.map((el) => (
-          <div className="col d-flex flex-column">
+          <div className="col d-flex flex-column" key={el.id}>
             <div className="card">
               <div
                 className="mb-1 p-3 d-flex justify-content-center align-items-center" id="product-card">
@@ -50,7 +50,7 @@ function App() {
               </div>
               <div className="mb-2 px-3 fw-bold">${el.price}</div>
               <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-                <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}" onclick="addToCart(this)">
+                <button type="button" className="btn btn-primary btn-sm" data-product-id="${productID}">
                   Add To Cart
                 </button>
               </div>
@@ -141,7 +141,7 @@ function App() {
             <div id="category-select">
               <select className="form-select border border-2 border-dark focus-ring focus-ring-dark rounded-pill"
                 onChange={handleCategoryChange}>
-                <option selected value="">Categories</option>
+                <option defaultValue={true} value="">Categories</option>
                 <option value="clothing" >Clothing</option>
                 <option value="sunglasses">Sunglasses</option>
                 <option value="kitchen">Kitchen</option>
@@ -221,6 +221,10 @@ function App() {
           </div>
         </div>
       </div>
+    )
+  } else if (pageState == 5) {
+    return (
+      <div>Hello</div>
     )
   }
 }
