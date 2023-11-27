@@ -209,8 +209,8 @@ function App() {
     let emailInput = document.getElementById("inputEmail4");
     let cardInput = document.getElementById("inputCard");
 
-    if (cartTotal <= 0) {
-      document.getElementById("cartAlert").innerHTML = `<div className="alert alert-danger" role="alert" id="alertCart">No items in the cart!</div>`;
+    if (cart.length <= 0) {
+      document.getElementById("cartAlert").innerHTML = `<div class="alert alert-danger" role="alert" id="alertCart">No items in the cart!</div>`;
       return;
     }
 
@@ -257,6 +257,10 @@ function App() {
 
   //PRODUCTS PAGE
   if (pageState == 0) {
+    let alert = document.getElementById("alertCart");
+    if (alert != null) {
+      alert.remove();
+    }
     return (
       <div data-bs-theme="dark">
         <nav className="navbar navbar-expand-md bg-body-tertiary">
@@ -324,6 +328,10 @@ function App() {
 
     //ABOUT PAGE
   } else if (pageState == 1) {
+    let alert = document.getElementById("alertCart");
+    if (alert != null) {
+      alert.remove();
+    }
     return (
       <div data-bs-theme="dark">
         <nav className="navbar navbar-expand-md bg-body-tertiary">
@@ -425,6 +433,9 @@ function App() {
         <div className="container">
           <h1 className="mt-4">Cart</h1>
 
+          <div id="cartAlert">
+          </div>
+
           <div className="row g-5 ms-0">
             <div className="card" style={{ width: 60 + '%' }}>
               <table className="table">
@@ -450,10 +461,10 @@ function App() {
 
             <div class="col-12 col-lg-4">
               <div class="card p-3 mb-5">
-                <h2 id="items-in-cart">Items in cart:</h2>
+                <h2 id="items-in-cart">Items in cart: {cart.length}</h2>
                 <div class="d-flex justify-content-between">
                   <p>Total</p>
-                  <p id="total-price">$0.00</p>
+                  <p id="total-price">${(cartTotal + cartTotal * .06).toFixed(2)}</p>
                 </div>
                 <div class="d-flex justify-content-start">
                   <div class="form-check form-check-inline">
