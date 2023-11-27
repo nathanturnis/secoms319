@@ -36,13 +36,24 @@ function App() {
   const addToCart = (el) => {
     setCart([...cart, el]);
   }
-
   const removeFromCart = (el) => {
-    console.log(el);
-    let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
-    setCart(hardCopy);
-    filterCart();
+
+    const indexToRemove = cart.findIndex(item => item.id === el.id);
+
+    if (indexToRemove !== -1) {
+      const updatedCart = [...cart];
+      updatedCart.splice(indexToRemove, 1);
+      setCart(updatedCart);
+
+      // Update filteredCart as well
+      setFilteredCart(prevFilteredCart => {
+        const updatedFilteredCart = prevFilteredCart.filter(item => {
+          // Check if the item exists in the updated cart
+          return updatedCart.some(updatedItem => updatedItem.id === item.id);
+        });
+        return updatedFilteredCart;
+      });
+    }
   };
 
   const getProducts = () => {
@@ -105,20 +116,21 @@ function App() {
         <div className="fw-normal mt-1"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" onClick={() => { removeFromCart(el) }}>Remove</a></div>
       </th>
       <td>{howManyofThis(el.id)}</td>
-      <td>${el.price * howManyofThis(el.id)} (${el.price} x {howManyofThis(el.id)})</td>
+      <td>${(el.price * howManyofThis(el.id)).toFixed(2)} (${el.price} x {howManyofThis(el.id)})</td>
     </tr>
 
   ));
 
-  const filterCart = () => {
+  function filterCart() {
 
-    setFilteredCart((prevFilteredCart) => {
+    setFilteredCart(() => {
       // Clear the previous filteredCart
       let newFilteredCart = [];
 
       for (let i = 0; i < Products.length; i++) {
         for (let j = 0; j < cart.length; j++) {
           if (Products[i].id === cart[j].id) {
+            console.log(Products[i]);
             newFilteredCart = [...newFilteredCart, Products[i]];
             break;
           }
@@ -359,6 +371,10 @@ function App() {
 
       </div>
     )
+  } else {
+    return (
+      <div></div>
+    );
   }
 }
 
