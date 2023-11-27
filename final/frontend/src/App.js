@@ -210,7 +210,7 @@ function App() {
     let cardInput = document.getElementById("inputCard");
 
     if (cartTotal <= 0) {
-      document.getElementById("cartAlert").innerHTML = `<div class="alert alert-danger" role="alert" id="alertCart">No items in the cart!</div>`;
+      document.getElementById("cartAlert").innerHTML = `<div className="alert alert-danger" role="alert" id="alertCart">No items in the cart!</div>`;
       return;
     }
 
@@ -247,11 +247,11 @@ function App() {
 
   const displayInformation = () => {
     return (
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Name: {name}</li>
-        <li class="list-group-item">Email: {email}</li>
-        <li class="list-group-item">Card: XXXX-XXXX-XXXX-{card.slice(-4)}</li>
-        <li class="list-group-item">Address: {address}, {city}, {state} {zipCode}</li>
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">Name: {name}</li>
+        <li className="list-group-item">Email: {email}</li>
+        <li className="list-group-item">Card: XXXX-XXXX-XXXX-{card.slice(-4)}</li>
+        <li className="list-group-item">Address: {address}, {city}, {state} {zipCode}</li>
       </ul>);
   }
 
@@ -362,20 +362,20 @@ function App() {
           </div>
         </nav >
 
-        <div class="container">
-          <div class="mt-3 border-bottom border-black">
+        <div className="container">
+          <div className="mt-3 border-bottom border-black">
             <h1>About The Developers</h1>
           </div>
-          <div class="mt-3">
+          <div className="mt-3">
             <h4>SE/ComS319 Construction of User Interfaces, Fall 2023</h4>
             <h5>Date: 11/28/23</h5>
           </div>
-          <div class="mt-5">
+          <div className="mt-5">
             <h3>Authors:</h3>
-            <p class="text-cool">Nathan Turnis - nturnis@iastate.edu</p>
-            <p class="text-cool">Ella Knott - edknott@iastate.edu</p>
+            <p className="text-cool">Nathan Turnis - nturnis@iastate.edu</p>
+            <p className="text-cool">Ella Knott - edknott@iastate.edu</p>
           </div>
-          <div class="thank-you p-5 rounded-3">
+          <div className="thank-you p-5 rounded-3">
             <h1>Thanks for checking out our site!</h1>
           </div>
         </div>
@@ -425,26 +425,67 @@ function App() {
         <div className="container">
           <h1 className="mt-4">Cart</h1>
 
-          <div className="border mt-3" style={{ width: 60 + '%' }}>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Item</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listCartItems}
-                <tr>
-                  <th scope="row"></th>
-                  <th></th>
-                  <th>Subtotal <br></br>Tax<br></br>Total</th>
-                  <td>${(cartTotal).toFixed(2)}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="row g-5 ms-0">
+            <div className="card" style={{ width: 60 + '%' }}>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {listCartItems}
+                  <tr>
+                    <th scope="row"></th>
+                    <th></th>
+                    <th>Subtotal <br></br>Tax<br></br>Total</th>
+                    <td>${(cartTotal).toFixed(2)}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12 col-lg-4">
+              <div class="card p-3 mb-5">
+                <h2 id="items-in-cart">Items in cart:</h2>
+                <div class="d-flex justify-content-between">
+                  <p>Total</p>
+                  <p id="total-price">$0.00</p>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="option1" />
+                    <label class="form-check-label" for="inlineRadio1">Debit/Credit Card</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="option2" />
+                    <label class="form-check-label" for="inlineRadio2">PayPal</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio3"
+                      value="option3" />
+                    <label class="form-check-label" for="inlineRadio3">Gift Card</label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <h2 className="mt-3 mb-3">Payment Information</h2>
@@ -519,7 +560,7 @@ function App() {
             </div>
             <div className="col-12">
               <button type="button" className="btn btn-success" onClick={(e) => { validate(e); }}>
-                <i className="bi-bag-check"></i> Order
+                <i className="bi-bag-check"></i> Place Order
               </button>
             </div>
           </form>
