@@ -113,7 +113,8 @@ function App() {
       </th>
       <th>
         <div>{el.name}</div>
-        <div className="fw-normal mt-1"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" onClick={() => { removeFromCart(el) }}>Remove</a></div>
+        <div className="fw-normal mt-1"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" id="cart-remove"
+          onClick={() => { removeFromCart(el) }}>Remove</a></div>
       </th>
       <td>{howManyofThis(el.id)}</td>
       <td>${(el.price * howManyofThis(el.id)).toFixed(2)} (${el.price} x {howManyofThis(el.id)})</td>
@@ -130,7 +131,6 @@ function App() {
       for (let i = 0; i < Products.length; i++) {
         for (let j = 0; j < cart.length; j++) {
           if (Products[i].id === cart[j].id) {
-            console.log(Products[i]);
             newFilteredCart = [...newFilteredCart, Products[i]];
             break;
           }
@@ -373,7 +373,7 @@ function App() {
     )
   } else {
     return (
-      <div></div>
+      <div><h1>Page not found.</h1></div>
     );
   }
 }
