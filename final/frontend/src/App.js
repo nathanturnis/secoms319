@@ -239,9 +239,8 @@ function App() {
       cardInput.setAttribute("class", "form-control is-valid")
     }
 
-    //open modal if validated
     if (isValidated) {
-      //   setPageState(2);
+      setPageState(3);
     }
   }
 
@@ -253,6 +252,19 @@ function App() {
         <li className="list-group-item">Card: XXXX-XXXX-XXXX-{card.slice(-4)}</li>
         <li className="list-group-item">Address: {address}, {city}, {state} {zipCode}</li>
       </ul>);
+  }
+
+  const resetPage = () => {
+    setCart([]);
+    setCartTotal(0);
+    setPageState(0);
+    setName("");
+    setEmail("");
+    setCard("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setZipCode("");
   }
 
   //PRODUCTS PAGE
@@ -580,6 +592,84 @@ function App() {
 
       </div>
     )
+
+    //ORDER CONFIRMATION PAGE
+  } else if (pageState == 3) {
+    return (
+      <div>
+        <nav className="navbar navbar-expand-md bg-body-tertiary " data-bs-theme="dark">
+          <div className="container-fluid">
+            <a className="navbar-brand">Sahara</a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarNavDropdown">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Listings</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
+                </li>
+              </ul>
+              <form className="d-flex invisible" role="search" id="product-search">
+                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
+                <button className="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div className="d-flex" id="cart-div">
+                <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
+                <div id="cart-counter">{cart.length}</div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div className="container mt-3 mb-5">
+          <div class="alert alert-success" role="alert">
+            Order successful! Please review the order information below.
+          </div>
+          <h1>Order Summary</h1>
+
+          <div className="border mt-3" style={{ width: 60 + '%' }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listCartItems}
+                <tr>
+                  <th scope="row"></th>
+                  <th></th>
+                  <th>Subtotal <br></br>Tax<br></br>Total</th>
+                  <td>${cartTotal}<br></br>${(cartTotal * .06).toFixed(2)}<br></br>${(cartTotal + cartTotal * .06).toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-4" style={{ maxWidth: 60 + '%' }}>
+            <h3>Your Information</h3>
+            {displayInformation()}
+          </div>
+          <button className="btn btn-primary mt-4" onClick={() => { resetPage() }}>Continue Shopping</button>
+        </div>
+
+      </div>
+    );
   } else {
     return (
       <div><h1>Page not found.</h1></div>
