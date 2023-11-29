@@ -121,13 +121,12 @@ function App() {
       </th>
       <th>
         <div>{el.name}</div>
-        <div className="fw-normal mt-1"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" id="cart-remove"
-          onClick={() => { removeFromCart(el) }}>Remove</a></div>
+        {pageState != 3 && <div className="fw-normal mt-1" id="cart-remove-link"><a className="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" id="cart-remove"
+          onClick={() => { removeFromCart(el) }}>Remove</a></div>}
       </th>
       <td>{howManyofThis(el.id)}</td>
       <td>${(el.price * howManyofThis(el.id)).toFixed(2)} (${el.price} x {howManyofThis(el.id)})</td>
     </tr>
-
   ));
 
   function filterCart() {
@@ -265,6 +264,7 @@ function App() {
     setCity("");
     setState("");
     setZipCode("");
+    window.scrollTo(0, 0);
   }
 
   //PRODUCTS PAGE
@@ -471,40 +471,40 @@ function App() {
               </table>
             </div>
 
-            <div class="col-12 col-lg-4">
-              <div class="card p-3 mb-5">
+            <div className="col-12 col-lg-4">
+              <div className="card p-3 mb-5">
                 <h2 id="items-in-cart">Items in cart: {cart.length}</h2>
-                <div class="d-flex justify-content-between">
+                <div className="d-flex justify-content-between">
                   <p>Total</p>
                   <p id="total-price">${(cartTotal + cartTotal * .06).toFixed(2)}</p>
                 </div>
-                <div class="d-flex justify-content-start">
-                  <div class="form-check form-check-inline">
+                <div className="d-flex justify-content-start">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio1"
                       value="option1" />
-                    <label class="form-check-label" for="inlineRadio1">Debit/Credit Card</label>
+                    <label className="form-check-label" htmlFor="inlineRadio1">Debit/Credit Card</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio2"
                       value="option2" />
-                    <label class="form-check-label" for="inlineRadio2">PayPal</label>
+                    <label className="form-check-label" htmlFor="inlineRadio2">PayPal</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio3"
                       value="option3" />
-                    <label class="form-check-label" for="inlineRadio3">Gift Card</label>
+                    <label className="form-check-label" htmlFor="inlineRadio3">Gift Card</label>
                   </div>
                 </div>
               </div>
@@ -515,21 +515,21 @@ function App() {
 
           <form className="row g-3 mb-5" id="checkout-form">
             <div className="col-md-6">
-              <label for="inputName" className="form-label">Full Name</label>
+              <label htmlFor="inputName" className="form-label">Full Name</label>
               <input type="text" className="form-control" id="inputName" onChange={(e) => { setName(e.target.value) }} />
               <div className="valid-feedback">Looks good!</div>
               <div className="invalid-feedback">Must be like, "John Doe"</div>
             </div>
 
             <div className="col-md-6">
-              <label for="inputEmail4" className="form-label">Email</label>
+              <label htmlFor="inputEmail4" className="form-label">Email</label>
               <input type="email" className="form-control" id="inputEmail4" onChange={(e) => { setEmail(e.target.value) }} />
               <div className="valid-feedback">Looks good!</div>
               <div className="invalid-feedback">Must be like, "abc@xyz.efg"</div>
             </div>
 
             <div className="col-12">
-              <label for="inputCard" className="form-label">Card</label>
+              <label htmlFor="inputCard" className="form-label">Card</label>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1"
                 ><i className="bi-credit-card-fill"></i></span>
@@ -550,7 +550,7 @@ function App() {
             </div>
 
             <div className="col-12">
-              <label for="inputAddress" className="form-label">Address</label>
+              <label htmlFor="inputAddress" className="form-label">Address</label>
               <input
                 type="text"
                 className="form-control"
@@ -558,7 +558,7 @@ function App() {
                 placeholder="1234 Main St" onChange={(e) => { setAddress(e.target.value) }} />
             </div>
             <div className="col-12">
-              <label for="inputAddress2" className="form-label">Address 2</label>
+              <label htmlFor="inputAddress2" className="form-label">Address 2</label>
               <input
                 type="text"
                 className="form-control"
@@ -566,19 +566,19 @@ function App() {
                 placeholder="Apartment, studio, or floor" />
             </div>
             <div className="col-md-6">
-              <label for="inputCity" className="form-label">City</label>
+              <label htmlFor="inputCity" className="form-label">City</label>
               <input type="text" className="form-control" id="inputCity" onChange={(e) => { setCity(e.target.value) }} />
             </div>
             <div className="col-md-4">
-              <label for="inputState" className="form-label">State</label>
+              <label htmlFor="inputState" className="form-label">State</label>
               <select id="inputState" className="form-select" onChange={(e) => { setState(e.target.value) }}>
-                <option selected>Choose...</option>
+                <option>Choose...</option>
                 <option>Iowa</option>
                 <option>...</option>
               </select>
             </div>
             <div className="col-md-2">
-              <label for="inputZip" className="form-label">Zip</label>
+              <label htmlFor="inputZip" className="form-label">Zip</label>
               <input type="text" className="form-control" id="inputZip" onChange={(e) => { setZipCode(e.target.value) }} />
             </div>
             <div className="col-12">
@@ -595,44 +595,9 @@ function App() {
 
     //ORDER CONFIRMATION PAGE
   } else if (pageState == 3) {
+    window.scrollTo(0, 0);
     return (
       <div>
-        <nav className="navbar navbar-expand-md bg-body-tertiary " data-bs-theme="dark">
-          <div className="container-fluid">
-            <a className="navbar-brand">Sahara</a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse justify-content-between"
-              id="navbarNavDropdown">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link">Listings</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
-                </li>
-              </ul>
-              <form className="d-flex invisible" role="search" id="product-search">
-                <input className="form-control me-2" type="search" placeholder="Search" onChange={handleChange} />
-                <button className="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <div className="d-flex" id="cart-div">
-                <a><img src="./images/cart-icon.png" width="44px" className="ms-1 me-4" /></a>
-                <div id="cart-counter">{cart.length}</div>
-              </div>
-            </div>
-          </div>
-        </nav>
-
         <div className="container mt-3 mb-5">
           <div class="alert alert-success" role="alert">
             Order successful! Please review the order information below.
