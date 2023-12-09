@@ -76,4 +76,26 @@ app.post("/addProduct", async (req, res) => {
             "count": count
         }
     };
+
+    const results = await db.collection("fakestore_catalog").insertOne(newDocument);
+    console.log(results);
+    res.status(200);
+    let dataToSend = [];
+    dataToSend[0] = newDocument;
+    res.send(dataToSend);
+
+
+})
+
+app.delete("/deleteProduct", async (req, res) => {
+    await client.connect();
+
+    const values = Object.values(req.body);
+
+    const id = values[0];
+
+    const results = await db.collection("fakestore_catalog").deleteOne({ id: id });
+    console.log(results);
+    res.status(200);
+    res.send(results);
 })
