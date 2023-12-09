@@ -1,25 +1,78 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [pageState, setPageState] = useState([0]);
+
+
+  if (pageState == 0) {
+    return (
+      <div>
+        <header className="mt-3">
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(1) }}>Read</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+        </header>
+
+        <div className="container mt-5">
+          <div>{pageState}</div>
+        </div>
+
+      </div>
+    );
+  } else if (pageState == 1) {
+    return (
+      <div>
+        <header className="mt-3">
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(1) }}>Read</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+        </header>
+
+        <div className="container mt-5">
+          <div>{pageState}</div>
+        </div>
+
+      </div>
+    );
+  } else if (pageState == 2) {
+    return (
+      <div>
+        <header className="mt-3">
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(1) }}>Read</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+        </header>
+
+        <div className="container">
+          <div>{pageState}</div>
+        </div>
+
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <header className="mt-3">
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(1) }}>Read</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+        </header>
+
+        <div className="container">
+          <div>{pageState}</div>
+        </div>
+
+      </div>
+    );
+  }
+
+
 }
 
 export default App;
