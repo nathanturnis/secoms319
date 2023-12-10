@@ -77,6 +77,26 @@ app.post("/addProduct", async (req, res) => {
 
 })
 
+app.put("/update", async (req, res) => {
+    await client.connect();
+
+    const id = req.body.itemId;
+    const price = req.body.newPrice;
+    console.log(id);
+    console.log(price);
+    const results = await db
+        .collection("fakestore_catalog")
+        .updateOne({ id: id },
+            {
+                $set: {
+                    price: price
+                }
+            });
+    res.status(200);
+    res.send(results);
+
+});
+
 app.delete("/deleteProduct", async (req, res) => {
     await client.connect();
 

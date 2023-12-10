@@ -5,6 +5,7 @@ function App() {
 
   const [pageState, setPageState] = useState([0]);
   const [products, setProducts] = useState([]);
+  const [oneProduct, setOneProduct] = useState([]);
 
   // useEffect(() => {
   //   getAllProducts();
@@ -16,11 +17,42 @@ function App() {
       .then((data => {
         console.log(data);
         setProducts(data);
-
       }))
   };
 
+  const getOneProduct = (id) => {
+    console.log(id);
+    if (id >= 1 && id <= 20) {
+      fetch("http://localhost:8081/" + id)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Show one product :", id);
+          console.log(data);
+          setOneProduct([data]);
+        });
+    } else {
+      console.log("Wrong number of Product id.");
+    }
+  };
+
   const showAllItems = products.map((el) => (
+    <div key={el.id} className='mt-5'>
+      <div className='d-flex'>
+        <img src={el.image} width={130}></img>
+        <div className='ms-3 mt-2'>
+          Title: {el.title} <br></br>
+          Price: ${el.price} <br></br>
+          Description: {el.description} <br></br>
+          Category: {el.category} <br></br>
+          Rating: {el.rating.rate} / 5.0
+          of {el.rating.count} reviews
+        </div>
+      </div>
+
+    </div>
+  ))
+
+  const showOneItem = oneProduct.map((el) => (
     <div key={el.id} className='mt-5'>
       <div className='d-flex'>
         <img src={el.image} width={130}></img>
@@ -42,7 +74,7 @@ function App() {
     console.log(e.target.value);
 
     const newProduct = {
-      id: document.querySelector("#id").value,
+      id: Number(document.querySelector("#id").value),
       title: document.querySelector("#title").value,
       price: Number(document.querySelector("#price").value),
       description: document.querySelector("#description").value,
@@ -68,9 +100,31 @@ function App() {
         if (data) {
           //const keys = Object.keys(data);
           const value = Object.values(data);
-          alert(value);
+          alert("Product created");
         }
       });
+  }
+
+  const updateOneProduct = (id, price) => {
+
+    console.log(price);
+
+    const body = {
+      itemId: id,
+      newPrice: price
+    }
+
+    fetch("http://localhost:8081/update", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        alert("product upated");
+        getOneProduct(id);
+      })
   }
 
   if (pageState == 0) {
@@ -143,6 +197,21 @@ function App() {
 
         <div className="container mt-5">
           <h2>Update a Product</h2>
+
+          <div className='mt-3'>
+            <label className='form-label'>Product ID to Update</label>
+            <input id='update-id' className='form-control' name='update-id'></input>
+            <button className='btn btn-primary mt-2 btn-sm' onClick={() => { getOneProduct(document.querySelector("#update-id").value) }}>Show Product to Update</button>
+          </div>
+
+          <div>{showOneItem}</div>
+          <div className='mt-3'>
+            <label className='form-label'>Price</label>
+            <input id='update-price' className='form-control' name='update-price'></input>
+            <button id='update-btn-price' className='btn btn-success mt-2 btn-sm'
+              onClick={() => { updateOneProduct(Number(document.querySelector("#update-id").value), Number(document.querySelector("#update-price").value)) }}>Update Price</button>
+          </div>
+
         </div>
 
       </div>
