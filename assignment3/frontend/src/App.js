@@ -7,10 +7,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [oneProduct, setOneProduct] = useState([]);
 
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
-
   function clearSetOneProduct() {
     setOneProduct([]);
   }
@@ -157,6 +153,7 @@ function App() {
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+          <button className='btn btn-primary ms-2' onClick={() => { setPageState(4) }}>Credits</button>
         </header>
 
         <div className="container mt-5">
@@ -195,6 +192,7 @@ function App() {
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+          <button className='btn btn-primary ms-2' onClick={() => { setPageState(4) }}>Credits</button>
         </header>
 
         <div className="container mt-5">
@@ -215,6 +213,7 @@ function App() {
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(3); clearSetOneProduct() }}>Delete</button>
+          <button className='btn btn-primary ms-2' onClick={() => { setPageState(4) }}>Credits</button>
         </header>
 
         <div className="container mt-5">
@@ -238,7 +237,7 @@ function App() {
 
       </div>
     );
-  } else {
+  } else if (pageState == 3) {
     return (
       <div>
         <header className="mt-3">
@@ -246,6 +245,7 @@ function App() {
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(2); clearSetOneProduct() }}>Update</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+          <button className='btn btn-primary ms-2' onClick={() => { setPageState(4) }}>Credits</button>
         </header>
 
         <div className="container mt-5">
@@ -260,6 +260,37 @@ function App() {
           <div>{showOneItem}</div>
 
           <button className='btn btn-danger btn-sml mt-3' onClick={() => { deleteOneProduct(Number(document.querySelector("#delete-id").value)) }}>Delete Product</button>
+
+        </div>
+
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <header className="mt-3">
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2); clearSetOneProduct() }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+          <button className='btn btn-primary ms-2' onClick={() => { setPageState(4) }}>Credits</button>
+        </header>
+
+        <div className='container mt-3'>
+
+          <p>Authors: <br></br>
+            Nathan Turnis - nturnis@iastate.edu <br></br>
+            Ella Knott - edknott@iastate.edu <br></br>
+
+            <br></br>
+            SE/COMS 319 Construction of User Interfaces <br></br>
+            12/10/23 <br></br>
+            Aldaco <br></br>
+            <br></br>
+            This project built in React using Bootstrap showcases a CRUD application using MonogDB.
+            The app uses products from fakestoreapi.com. You can create a product by filling out information,
+            get a list of all products, update a product's price, and delete a product.
+          </p>
 
         </div>
 
