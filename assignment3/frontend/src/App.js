@@ -11,6 +11,10 @@ function App() {
   //   getAllProducts();
   // }, []);
 
+  function clearSetOneProduct() {
+    setOneProduct([]);
+  }
+
   const getAllProducts = () => {
     fetch("http://localhost:8081/getAllRobots")
       .then((response) => response.json())
@@ -127,6 +131,24 @@ function App() {
       })
   }
 
+  const deleteOneProduct = (id) => {
+    fetch("http://localhost:8081/deleteProduct", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "id": id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Delete a product completed : ", id);
+        console.log(data);
+        if (data) {
+          const key = Object.keys(data);
+          const value = Object.values(data);
+          alert(key + value);
+        }
+      });
+  }
+
   if (pageState == 0) {
     return (
       <div>
@@ -192,7 +214,7 @@ function App() {
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
-          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(3); clearSetOneProduct() }}>Delete</button>
         </header>
 
         <div className="container mt-5">
@@ -222,12 +244,23 @@ function App() {
         <header className="mt-3">
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(0) }}>Create</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(1); getAllProducts() }}>Read</button>
-          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2) }}>Update</button>
+          <button className="btn btn-primary ms-2" onClick={() => { setPageState(2); clearSetOneProduct() }}>Update</button>
           <button className="btn btn-primary ms-2" onClick={() => { setPageState(3) }}>Delete</button>
         </header>
 
         <div className="container mt-5">
           <h2>Delete a Product</h2>
+
+          <div className='mt-3'>
+            <label className='form-label'>Product ID to Delete</label>
+            <input id='delete-id' className='form-control' name='deleye-id'></input>
+            <button className='btn btn-primary mt-2 btn-sm' onClick={() => { getOneProduct(document.querySelector("#delete-id").value) }}>Show Product to Update</button>
+          </div>
+
+          <div>{showOneItem}</div>
+
+          <button className='btn btn-danger btn-sml mt-3' onClick={() => { deleteOneProduct(Number(document.querySelector("#delete-id").value)) }}>Delete Product</button>
+
         </div>
 
       </div>
