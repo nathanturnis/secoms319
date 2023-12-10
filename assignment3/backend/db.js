@@ -52,28 +52,18 @@ app.get("/:id", async (req, res) => {
 
 app.post("/addProduct", async (req, res) => {
     await client.connect();
-    const values = Object.values(req.body);
-
-    const id = values[0];
-    const title = values[1];
-    const price = values[2];
-    const description = values[3];
-    const category = values[4];
-    const image = values[5];
-    const rating = Object.values[values];
-    const rate = rating[0];
-    const count = rating[1];
+    console.log(req.body);
 
     const newDocument = {
-        "id": id,
-        "title": title,
-        "price": price,
-        "description": description,
-        "category": category,
-        "image": image,
+        "id": req.body.id,
+        "title": req.body.title,
+        "price": req.body.price,
+        "description": req.body.description,
+        "category": req.body.category,
+        "image": req.body.image,
         "rating": {
-            "rate": rate,
-            "count": count
+            "rate": req.body.rating.rate,
+            "count": req.body.rating.count
         }
     };
 
