@@ -16,11 +16,23 @@
   max-height: 100%;
 }
 
+#listings-image {
+  max-height: 100%;
+}
+
 #product-name {
   height: 50px;
 }
 
+#listings-name {
+  height: 50px;
+}
+
 #product-card {
+  height: 200px;
+}
+
+#listings-card {
   height: 200px;
 }
 

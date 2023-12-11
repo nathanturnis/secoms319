@@ -137,10 +137,12 @@ function App() {
                   className="img-fluid"
                   id="listings-image" />
               </div>
-              <div className="overflow-hidden px-3 mt-2" id="product-name">
+              <div className="overflow-hidden px-3 mt-2" id="listings-name">
                 {el.title}
               </div>
               <div className="mb-2 px-3 fw-bold">${el.price}</div>
+              <div className="mb-2 px-3 ">{el.location}, {el.state}</div>
+              <div className="mb-2 px-3">Purchase By: {el.sellby}</div>
             </div>
           </div>
         ))
