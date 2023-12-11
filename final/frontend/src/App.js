@@ -20,6 +20,8 @@ function App() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
 
+  const [listings, setListings] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -72,6 +74,15 @@ function App() {
         setProducts(data);
         setFilteredProducts(data);
       });
+  };
+
+  const getListings = () => {
+    fetch("http://localhost:8081/allListings")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setListings(data);
+      })
   };
 
   const listProducts = (FilteredProducts) => {
@@ -293,7 +304,7 @@ function App() {
                   <a className="nav-link active">Browse</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={() => { setPageState(4) }}>Listings</a>
+                  <a className="nav-link" onClick={() => { setPageState(4); getListings() }}>Listings</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
@@ -364,7 +375,7 @@ function App() {
                   <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={() => { setPageState(4) }}>Listings</a>
+                  <a className="nav-link" onClick={() => { setPageState(4); getListings() }}>Listings</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link active" onClick={() => { setPageState(1) }}>About</a>
@@ -424,7 +435,7 @@ function App() {
                   <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={() => { setPageState(4) }}>Listings</a>
+                  <a className="nav-link" onClick={() => { setPageState(4); getListings() }}>Listings</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
@@ -656,7 +667,7 @@ function App() {
                   <a className="nav-link" onClick={() => { setPageState(0) }}>Browse</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" onClick={() => { setPageState(4) }}>Listings</a>
+                  <a className="nav-link active" onClick={() => { setPageState(4); getListings() }}>Listings</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" onClick={() => { setPageState(1) }}>About</a>
