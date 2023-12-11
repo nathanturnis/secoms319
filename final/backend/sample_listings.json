@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "title": "Waterproof Sneakers",
+    "description": "Comfortable sneakers that are perfect for water activites.",
+    "image": "",
+    "price": 20,
+    "category": "shoes",
+    "condition": "like-new",
+    "location": "Ames",
+    "state": "Iowa",
+    "zipcode": 50014,
+    "sellby": "12/15/23"
+  },
+  {
+    "id": 2,
+    "title": "Women's Gray Beanie",
+    "description": "A nice gray beanie for winter.",
+    "image": "",
+    "price": 10,
+    "category": "hats",
+    "condition": "like-new",
+    "location": "Ames",
+    "state": "Iowa",
+    "zipcode": 50014,
+    "sellby": "12/15/23"
+  }
+]
