@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.static("public"));
 app.use("/images/products", express.static("images/products"));
 app.use("/images/ratings", express.static("images/ratings"));
+app.use("/images/listings", express.static("images/listings"));
 
 const port = "8081";
 const host = "localhost";

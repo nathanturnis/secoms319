@@ -123,6 +123,33 @@ function App() {
     </div>
   }
 
+  const listListingItems = (listings) => {
+    return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-3 mb-5"
+      id="listings-grid"> {
+
+        listings.map((el) => (
+          <div className="col d-flex flex-column" key={el.id}>
+            <div className="card">
+              <div
+                className="mb-1 p-3 d-flex justify-content-center align-items-center" id="listings-card">
+                <img
+                  src={`http://localhost:8081/${el.image}`}
+                  className="img-fluid"
+                  id="listings-image" />
+              </div>
+              <div className="overflow-hidden px-3 mt-2" id="product-name">
+                {el.title}
+              </div>
+              <div className="mb-2 px-3 fw-bold">${el.price}</div>
+            </div>
+          </div>
+        ))
+
+      }
+
+    </div>
+  }
+
   const listCartItems = filteredCart.map((el) => (
     <tr key={el.id}>
       <th scope="row" style={{ width: 30 + '%' }}>
@@ -646,6 +673,7 @@ function App() {
 
       </div>
     );
+    //LISTINGS PAGE
   } else if (pageState == 4) {
     return (
       <div>
@@ -684,6 +712,11 @@ function App() {
             </div>
           </div>
         </nav>
+
+        <div className="container">
+          {listListingItems(listings)}
+        </div>
+
       </div>
     );
   } else {
