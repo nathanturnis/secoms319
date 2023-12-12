@@ -32,6 +32,7 @@ function App() {
   const [listingItem, setListingItem] = useState([]);
 
   //USE STATES FOR MODAL LISTING
+  const [listID, setListID] = useState(0);
   const [listTitle, setListTitle] = useState('');
   const [listDescription, setListDescription] = useState('');
   const [listPrice, setListPrice] = useState(0.0);
@@ -110,8 +111,38 @@ function App() {
       })
   };
 
+  const updateListing = (id) => {
+    const body = {
+      id: id,
+      title: listTitle,
+      description: listDescription,
+      price: listPrice,
+      category: listCategory,
+      location: listLocation,
+      state: listState,
+      zipcode: listZipcode,
+      sellby: listSellby
+    }
+
+    console.log(body);
+
+    fetch("http://localhost:8081/updateListing", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        handleClose();
+        getListings();
+      })
+
+  }
+
   function updateItemDetails() {
     if (listingItem[0] != null) {
+      setListID(listingItem[0].id);
       setListTitle(listingItem[0].title);
       setListDescription(listingItem[0].description);
       setListPrice(listingItem[0].price);
@@ -197,7 +228,7 @@ function App() {
     return <div>
       {
         listingItem.map((el) => (
-          <div>
+          <div key={el.id}>
             <div className="d-flex">
               <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
                 <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
@@ -205,21 +236,21 @@ function App() {
               <div className="ms-5 w-100">
                 <div>
                   <label className="form-label">Item Name</label>
-                  <input className="form-control mb-3" placeholder="Enter a name" value={listTitle} onChange={(el) => setListTitle(el.value)}></input>
+                  <input className="form-control mb-3" placeholder="Enter a name" value={listTitle} onChange={(el) => setListTitle(el.target.value)}></input>
                   <label className="form-label">Item Description</label>
-                  <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }} value={listDescription} onChange={(el) => setListDescription(el.value)}></textarea>
+                  <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }} value={listDescription} onChange={(el) => setListDescription(el.target.value)}></textarea>
                 </div>
                 <div className="d-flex mt-3">
                   <div className="flex-fill me-5">
                     <label className="form-label">Item Price</label>
                     <div className="input-group">
-                      <span class="input-group-text">$</span>
-                      <input className="form-control" placeholder="Enter a price" type="number" min="1" step="any" value={listPrice} onChange={(el) => setListPrice(el.value)}></input>
+                      <span className="input-group-text">$</span>
+                      <input className="form-control" placeholder="Enter a price" type="number" min="1" step="any" value={listPrice} onChange={(el) => setListPrice(el.target.value)}></input>
                     </div>
                   </div>
                   <div className="flex-fill">
                     <label className="form-label">Category</label>
-                    <input className="form-control" placeholder="Enter a category" value={listCategory} onChange={(el) => setListCategory(el.value)}></input>
+                    <input className="form-control" placeholder="Enter a category" value={listCategory} onChange={(el) => setListCategory(el.target.value)}></input>
                   </div>
                 </div>
               </div>
@@ -228,20 +259,20 @@ function App() {
               <div className="d-flex">
                 <div className="flex-fill me-5">
                   <label className="form-label">Location</label>
-                  <input className="form-control" placeholder="Enter a location" value={listLocation} onChange={(el) => setListLocation(el.value)}></input>
+                  <input className="form-control" placeholder="Enter a location" value={listLocation} onChange={(el) => setListLocation(el.target.value)}></input>
                 </div>
                 <div className="me-5">
                   <label className="form-label">State</label>
-                  <input className="form-control" placeholder="Enter a state" value={listState} onChange={(el) => setListState(el.value)}></input>
+                  <input className="form-control" placeholder="Enter a state" value={listState} onChange={(el) => setListState(el.target.value)}></input>
                 </div>
                 <div>
                   <label className="form-label">Zipcode</label>
-                  <input className="form-control" placeholder="Enter a Zipcode" type="number" value={listZipcode} onChange={(el) => setListZipcode(el.value)}></input>
+                  <input className="form-control" placeholder="Enter a Zipcode" type="number" value={listZipcode} onChange={(el) => setListZipcode(el.target.value)}></input>
                 </div>
               </div>
               <div className="w-50 mt-3 mb-3">
                 <label className="form-label">Sell-By</label>
-                <input className="form-control" placeholder="mm/dd/yyyy" value={listSellby} onChange={(el) => setListSellby(el.value)}></input>
+                <input className="form-control" placeholder="mm/dd/yyyy" value={listSellby} onChange={(el) => setListSellby(el.target.value)}></input>
               </div>
             </div>
           </div>
@@ -829,7 +860,7 @@ function App() {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleClose}>
+              <Button variant="primary" onClick={() => { updateListing(listID) }}>
                 Update Listing
               </Button>
               <Button variant="danger" onClick={handleClose}>

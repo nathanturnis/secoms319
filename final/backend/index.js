@@ -64,7 +64,6 @@ app.put("/updateListing", async (req, res) => {
             $set: {
                 title: req.body.title,
                 description: req.body.description,
-                image: req.body.image,
                 price: req.body.price,
                 category: req.body.category,
                 condtion: "like-new",
