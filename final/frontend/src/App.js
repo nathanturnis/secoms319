@@ -30,6 +30,7 @@ function App() {
 
   const [listings, setListings] = useState([]);
   const [listingItem, setListingItem] = useState([]);
+  const [isCreatingListing, setIsCreatingListing] = useState(false);
 
   //USE STATES FOR MODAL LISTING
   const [listID, setListID] = useState(0);
@@ -185,6 +186,15 @@ function App() {
 
   function updateItemDetails() {
     if (listingItem[0] != null) {
+      if (!isCreatingListing) {
+        document.getElementById("create-listing-btn").disabled = true;
+        document.getElementById("update-listing-btn").disabled = false;
+        document.getElementById("delete-listing-btn").disabled = false;
+      } else {
+        document.getElementById("create-listing-btn").disabled = false;
+        document.getElementById("update-listing-btn").disabled = true;
+        document.getElementById("delete-listing-btn").disabled = true;
+      }
       setListID(listingItem[0].id);
       setListTitle(listingItem[0].title);
       setListDescription(listingItem[0].description);
@@ -271,7 +281,7 @@ function App() {
               <div className="mb-2 px-3 ">{el.location}, {el.state}</div>
               <div className="mb-2 px-3">Purchase By: {el.sellby}</div>
               <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-                <button className="btn btn-primary" onClick={() => { handleShow(); setListingItem([el]); }}>View</button>
+                <button className="btn btn-primary" onClick={() => { handleShow(); setListingItem([el]); setIsCreatingListing(false); }}>View</button>
               </div>
             </div>
           </div>
@@ -907,7 +917,7 @@ function App() {
         <div className="container">
 
           <div className="mt-3">
-            <button className="btn btn-success" onClick={() => { handleShow(); setListingItem([test]); }}> + Create New Listing</button>
+            <button className="btn btn-success" onClick={() => { handleShow(); setListingItem([test]); setIsCreatingListing(true) }}> + Create New Listing</button>
           </div>
 
           {listListingItems(listings)}
@@ -923,13 +933,13 @@ function App() {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="success" onClick={() => { createListing() }}>
+              <Button id="create-listing-btn" variant="success" onClick={() => { createListing() }}>
                 Create Listing
               </Button>
-              <Button variant="primary" onClick={() => { updateListing(listID) }}>
+              <Button id="update-listing-btn" variant="primary" onClick={() => { updateListing(listID) }}>
                 Update Listing
               </Button>
-              <Button variant="danger" onClick={() => { deleteListing(listID) }}>
+              <Button id="delete-listing-btn" variant="danger" onClick={() => { deleteListing(listID) }}>
                 Delete Listing
               </Button>
             </Modal.Footer>
