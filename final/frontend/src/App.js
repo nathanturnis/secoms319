@@ -167,7 +167,20 @@ function App() {
         handleClose();
         getListings();
       })
+  }
 
+  const deleteListing = (id) => {
+    fetch("http://localhost:8081/deleteListing", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "id": id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        handleClose();
+        getListings();
+      });
   }
 
   function updateItemDetails() {
@@ -916,7 +929,7 @@ function App() {
               <Button variant="primary" onClick={() => { updateListing(listID) }}>
                 Update Listing
               </Button>
-              <Button variant="danger" onClick={handleClose}>
+              <Button variant="danger" onClick={() => { deleteListing(listID) }}>
                 Delete Listing
               </Button>
             </Modal.Footer>
