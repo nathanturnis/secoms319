@@ -1,3 +1,4 @@
+//setting up server
 var express = require("express");
 var cors = require("cors");
 var app = express();
@@ -25,6 +26,7 @@ app.listen(port, () => {
     console.log("App listening at http://%s:%s", host, port);
 });
 
+//returns a list of all the products
 app.get("/allProducts", async (req, res) => {
     await client.connect();
     console.log("Node connected successfully to GET MongoDB");
@@ -39,6 +41,7 @@ app.get("/allProducts", async (req, res) => {
     res.send(results);
 });
 
+//returns a list of all the listings
 app.get("/allListings", async (req, res) => {
     await client.connect();
     console.log("Node connected successfully to GET MongoDB");
@@ -53,6 +56,7 @@ app.get("/allListings", async (req, res) => {
     res.send(results);
 })
 
+//updates a listing and its information
 app.put("/updateListing", async (req, res) => {
     await client.connect();
 
@@ -78,6 +82,7 @@ app.put("/updateListing", async (req, res) => {
     res.send(results);
 })
 
+//creates a new listing
 app.post("/addListing", async (req, res) => {
     await client.connect();
 
@@ -103,6 +108,7 @@ app.post("/addListing", async (req, res) => {
     res.send(dataToSend);
 })
 
+//deletes a listing
 app.delete("/deleteListing", async (req, res) => {
     await client.connect();
 

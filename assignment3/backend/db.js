@@ -21,6 +21,7 @@ app.listen(port, () => {
     console.log("App listening at http://%s:%s", host, port);
 });
 
+//method 
 app.get("/getAllRobots", async (req, res) => {
     await client.connect();
     console.log("Node connected successfully to GET MongoDB");
