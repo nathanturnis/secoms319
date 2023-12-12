@@ -30,6 +30,16 @@ function App() {
   const [listings, setListings] = useState([]);
   const [listingItem, setListingItem] = useState([]);
 
+  //USE STATES FOR MODAL LISTING
+  const [listTitle, setListTitle] = useState('');
+  const [listDescription, setListDescription] = useState('');
+  const [listPrice, setListPrice] = useState(0.0);
+  const [listCategory, setListCategory] = useState('');
+  const [listLocation, setListLocation] = useState('');
+  const [listState, setListState] = useState('');
+  const [listZipcode, setListZipcode] = useState(0);
+  const [listSellby, setListSellby] = useState('');
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -37,6 +47,12 @@ function App() {
   useEffect(() => {
     total();
   }, [cart]);
+
+  useEffect(() => {
+    if (listingItem) {
+      updateItemDetails();
+    }
+  }, [listingItem])
 
   const total = () => {
     let totalVal = 0;
@@ -92,6 +108,19 @@ function App() {
         setListings(data);
       })
   };
+
+  function updateItemDetails() {
+    if (listingItem[0] != null) {
+      setListTitle(listingItem[0].title);
+      setListDescription(listingItem[0].description);
+      setListPrice(listingItem[0].price);
+      setListCategory(listingItem[0].category);
+      setListLocation(listingItem[0].location);
+      setListState(listingItem[0].state);
+      setListZipcode(listingItem[0].zipcode);
+      setListSellby(listingItem[0].sellby);
+    }
+  }
 
   const listProducts = (FilteredProducts) => {
     return <div
@@ -152,7 +181,7 @@ function App() {
               <div className="mb-2 px-3 ">{el.location}, {el.state}</div>
               <div className="mb-2 px-3">Purchase By: {el.sellby}</div>
               <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-                <button className="btn btn-primary" onClick={() => { handleShow(); setListingItem([el]) }}>View</button>
+                <button className="btn btn-primary" onClick={() => { handleShow(); setListingItem([el]); }}>View</button>
               </div>
             </div>
           </div>
@@ -175,21 +204,21 @@ function App() {
               <div className="ms-5 w-100">
                 <div>
                   <label className="form-label">Item Name</label>
-                  <input className="form-control mb-3" placeholder="Enter a name" value={el.title}></input>
+                  <input className="form-control mb-3" placeholder="Enter a name" value={listTitle} onChange={(el) => setListTitle(el.value)}></input>
                   <label className="form-label">Item Description</label>
-                  <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }}></textarea>
+                  <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }} value={listDescription} onChange={(el) => setListDescription(el.value)}></textarea>
                 </div>
                 <div className="d-flex mt-3">
                   <div className="flex-fill me-5">
                     <label className="form-label">Item Price</label>
                     <div className="input-group">
                       <span class="input-group-text">$</span>
-                      <input className="form-control" placeholder="Enter a price" type="number" min="1" step="any"></input>
+                      <input className="form-control" placeholder="Enter a price" type="number" min="1" step="any" value={listPrice} onChange={(el) => setListPrice(el.value)}></input>
                     </div>
                   </div>
                   <div className="flex-fill">
                     <label className="form-label">Category</label>
-                    <input className="form-control" placeholder="Enter a category"></input>
+                    <input className="form-control" placeholder="Enter a category" value={listCategory} onChange={(el) => setListCategory(el.value)}></input>
                   </div>
                 </div>
               </div>
@@ -198,20 +227,20 @@ function App() {
               <div className="d-flex">
                 <div className="flex-fill me-5">
                   <label className="form-label">Location</label>
-                  <input className="form-control" placeholder="Enter a location"></input>
+                  <input className="form-control" placeholder="Enter a location" value={listLocation} onChange={(el) => setListLocation(el.value)}></input>
                 </div>
                 <div className="me-5">
                   <label className="form-label">State</label>
-                  <input className="form-control" placeholder="Enter a state"></input>
+                  <input className="form-control" placeholder="Enter a state" value={listState} onChange={(el) => setListState(el.value)}></input>
                 </div>
                 <div>
                   <label className="form-label">Zipcode</label>
-                  <input className="form-control" placeholder="Enter a Zipcode"></input>
+                  <input className="form-control" placeholder="Enter a Zipcode" type="number" value={listZipcode} onChange={(el) => setListZipcode(el.value)}></input>
                 </div>
               </div>
               <div className="w-50 mt-3 mb-3">
                 <label className="form-label">Sell-By</label>
-                <input className="form-control" placeholder="mm/dd/yyyy"></input>
+                <input className="form-control" placeholder="mm/dd/yyyy" value={listSellby} onChange={(el) => setListSellby(el.value)}></input>
               </div>
             </div>
           </div>
