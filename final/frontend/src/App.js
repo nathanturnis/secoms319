@@ -428,7 +428,7 @@ function App() {
           </div>
           <div className="mt-3">
             <h4>SE/ComS319 Construction of User Interfaces, Fall 2023</h4>
-            <h5>Date: 11/28/23</h5>
+            <h5>Date: 12/13/23</h5>
           </div>
           <div className="mt-5">
             <h3>Authors:</h3>
