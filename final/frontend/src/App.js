@@ -19,6 +19,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [filteredCart, setFilteredCart] = useState([]);
 
+  //USE STATES FOR PAYMENT INFO
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [card, setCard] = useState("");

@@ -52,3 +52,28 @@ app.get("/allListings", async (req, res) => {
     res.status(200);
     res.send(results);
 })
+
+app.put("/updateListing", async (req, res) => {
+    await client.connect();
+
+    const id = req.body.id;
+
+    const results = await db
+        .collection("listings")
+        .updateOne({ id: id }, {
+            $set: {
+                title: req.body.title,
+                description: req.body.description,
+                image: req.body.image,
+                price: req.body.price,
+                category: req.body.category,
+                condtion: "like-new",
+                location: req.body.location,
+                state: req.body.state,
+                zipcode: req.body.zipcode,
+                sellby: req.body.sellby
+            }
+        });
+    res.status(200);
+    res.send(results);
+})
