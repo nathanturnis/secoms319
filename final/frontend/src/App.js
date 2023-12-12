@@ -175,7 +175,7 @@ function App() {
               <div className="ms-5 w-100">
                 <div>
                   <label className="form-label">Item Name</label>
-                  <input className="form-control mb-3" placeholder="Enter a name"></input>
+                  <input className="form-control mb-3" placeholder="Enter a name" value={el.title}></input>
                   <label className="form-label">Item Description</label>
                   <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }}></textarea>
                 </div>
