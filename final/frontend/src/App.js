@@ -36,6 +36,7 @@ function App() {
   const [listID, setListID] = useState(0);
   const [listTitle, setListTitle] = useState('');
   const [listDescription, setListDescription] = useState('');
+  const [listImage, setListImage] = useState('');
   const [listPrice, setListPrice] = useState(0.0);
   const [listCategory, setListCategory] = useState('');
   const [listLocation, setListLocation] = useState('');
@@ -120,7 +121,7 @@ function App() {
       id: nextID,
       title: listTitle,
       description: listDescription,
-      image: "",
+      image: listImage,
       price: listPrice,
       category: listCategory,
       location: listLocation,
@@ -147,6 +148,7 @@ function App() {
       id: id,
       title: listTitle,
       description: listDescription,
+      image: listImage,
       price: listPrice,
       category: listCategory,
       location: listLocation,
@@ -198,6 +200,7 @@ function App() {
       setListID(listingItem[0].id);
       setListTitle(listingItem[0].title);
       setListDescription(listingItem[0].description);
+      setListImage(listingItem[0].image);
       setListPrice(listingItem[0].price);
       setListCategory(listingItem[0].category);
       setListLocation(listingItem[0].location);
@@ -298,8 +301,14 @@ function App() {
         listingItem.map((el) => (
           <div key={el.id}>
             <div className="d-flex">
-              <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
-                <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
+              <div className="flex-column">
+                <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
+                  <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
+                </div>
+                <div className="mt-2">
+                  <label className="form-label">Item Image Link</label>
+                  <input className="form-control" placeholder="Enter image link" value={listImage} onChange={(el) => setListImage(el.target.value)}></input>
+                </div>
               </div>
               <div className="ms-5 w-100">
                 <div>
