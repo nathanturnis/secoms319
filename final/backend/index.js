@@ -101,3 +101,14 @@ app.post("/addListing", async (req, res) => {
     dataToSend[0] = newDocument;
     res.send(dataToSend);
 })
+
+app.delete("/deleteListing", async (req, res) => {
+    await client.connect();
+
+    const id = req.body.id;
+
+    const results = await db.collection("listings").deleteOne({ id: id });
+    console.log(results);
+    res.status(200);
+    res.send(results);
+})
