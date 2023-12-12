@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function App() {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [pageState, setPageState] = useState(0);
 
@@ -143,6 +150,9 @@ function App() {
               <div className="mb-2 px-3 fw-bold">${el.price}</div>
               <div className="mb-2 px-3 ">{el.location}, {el.state}</div>
               <div className="mb-2 px-3">Purchase By: {el.sellby}</div>
+              <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
+                <button className="btn btn-primary" onClick={handleShow}>View</button>
+              </div>
             </div>
           </div>
         ))
@@ -717,6 +727,22 @@ function App() {
 
         <div className="container">
           {listListingItems(listings)}
+
+          <Modal size="xl" show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
         </div>
 
       </div>
