@@ -167,26 +167,51 @@ function App() {
     return <div>
       {
         listingItem.map((el) => (
-          <div className="d-flex">
-            <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
-              <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
-            </div>
-            <div className="ms-5 w-100">
-              <div>
-                <label className="form-label">Item Name</label>
-                <input className="form-control mb-3"></input>
-                <label className="form-label">Item Description</label>
-                <textarea className="form-control mb-3" style={{ resize: "none" }}></textarea>
+          <div>
+            <div className="d-flex">
+              <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
+                <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
               </div>
-              <div className="d-flex mt-3">
+              <div className="ms-5 w-100">
+                <div>
+                  <label className="form-label">Item Name</label>
+                  <input className="form-control mb-3" placeholder="Enter a name"></input>
+                  <label className="form-label">Item Description</label>
+                  <textarea className="form-control mb-3" placeholder="Enter a description" style={{ resize: "none" }}></textarea>
+                </div>
+                <div className="d-flex mt-3">
+                  <div className="flex-fill me-5">
+                    <label className="form-label">Item Price</label>
+                    <div className="input-group">
+                      <span class="input-group-text">$</span>
+                      <input className="form-control" placeholder="Enter a price" type="number" min="1" step="any"></input>
+                    </div>
+                  </div>
+                  <div className="flex-fill">
+                    <label className="form-label">Category</label>
+                    <input className="form-control" placeholder="Enter a category"></input>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-3">
+              <div className="d-flex">
                 <div className="flex-fill me-5">
-                  <label className="form-label">Item Price</label>
-                  <input className="form-control"></input>
+                  <label className="form-label">Location</label>
+                  <input className="form-control" placeholder="Enter a location"></input>
                 </div>
-                <div className="flex-fill">
-                  <label className="form-label">Category</label>
-                  <input className="form-control"></input>
+                <div className="me-5">
+                  <label className="form-label">State</label>
+                  <input className="form-control" placeholder="Enter a state"></input>
                 </div>
+                <div>
+                  <label className="form-label">Zipcode</label>
+                  <input className="form-control" placeholder="Enter a Zipcode"></input>
+                </div>
+              </div>
+              <div className="w-50 mt-3 mb-3">
+                <label className="form-label">Sell-By</label>
+                <input className="form-control" placeholder="mm/dd/yyyy"></input>
               </div>
             </div>
           </div>
