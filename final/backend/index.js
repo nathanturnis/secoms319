@@ -76,3 +76,28 @@ app.put("/updateListing", async (req, res) => {
     res.status(200);
     res.send(results);
 })
+
+app.post("/addListing", async (req, res) => {
+    await client.connect();
+
+    const newDocument = {
+        "id": req.body.id,
+        "title": req.body.title,
+        "description": req.body.description,
+        "image": req.body.image,
+        "price": req.body.price,
+        "category": req.body.category,
+        "condtion": "like-new",
+        "location": req.body.location,
+        "state": req.body.state,
+        "zipcode": req.body.zipcode,
+        "sellby": req.body.sellby
+    }
+
+    const results = await db.collection("listings").insertOne(newDocument);
+    console.log(results);
+    res.status(200);
+    let dataToSend = [];
+    dataToSend[0] = newDocument;
+    res.send(dataToSend);
+})

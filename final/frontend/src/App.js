@@ -42,6 +42,8 @@ function App() {
   const [listZipcode, setListZipcode] = useState(0);
   const [listSellby, setListSellby] = useState('');
 
+  const [nextID, setNextID] = useState(0);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -108,6 +110,7 @@ function App() {
       .then((data) => {
         console.log(data);
         setListings(data);
+        setNextID(data.length + 1);
       })
   };
 
@@ -154,6 +157,20 @@ function App() {
     }
   }
 
+  const test = {
+    id: 0,
+    title: "",
+    description: "",
+    image: "",
+    price: "",
+    category: "",
+    condition: "",
+    location: "",
+    state: "",
+    zipcode: "",
+    sellby: ""
+  }
+
   const listProducts = (FilteredProducts) => {
     return <div
       className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-3 mb-5"
@@ -197,6 +214,7 @@ function App() {
       id="listings-grid"> {
 
         listings.map((el) => (
+
           <div className="col d-flex flex-column" key={el.id}>
             <div className="card">
               <div
@@ -206,7 +224,7 @@ function App() {
                   className="img-fluid"
                   id="listings-image" />
               </div>
-              <div className="overflow-hidden px-3 mt-2" id="listings-name">
+              <div className="overflow-hidden px-3 mt-2 fw-bold" id="listings-name">
                 {el.title}
               </div>
               <div className="mb-2 px-3 fw-bold">${el.price}</div>
@@ -847,6 +865,11 @@ function App() {
         </nav>
 
         <div className="container">
+
+          <div className="mt-3">
+            <button className="btn btn-success" onClick={() => { handleShow(); setListingItem([test]); }}> + Create New Listing</button>
+          </div>
+
           {listListingItems(listings)}
 
           <Modal size="xl" show={show} onHide={handleClose}>
@@ -859,6 +882,9 @@ function App() {
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
+              </Button>
+              <Button variant="success" onClick={handleClose}>
+                Create Listing
               </Button>
               <Button variant="primary" onClick={() => { updateListing(listID) }}>
                 Update Listing
