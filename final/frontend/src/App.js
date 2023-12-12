@@ -28,6 +28,7 @@ function App() {
   const [city, setCity] = useState("");
 
   const [listings, setListings] = useState([]);
+  const [listingItem, setListingItem] = useState([]);
 
   useEffect(() => {
     getProducts();
@@ -151,7 +152,7 @@ function App() {
               <div className="mb-2 px-3 ">{el.location}, {el.state}</div>
               <div className="mb-2 px-3">Purchase By: {el.sellby}</div>
               <div className="mt-2 mb-2 ms-4 me-4 px-3 d-grid">
-                <button className="btn btn-primary" onClick={handleShow}>View</button>
+                <button className="btn btn-primary" onClick={() => { handleShow(); setListingItem([el]) }}>View</button>
               </div>
             </div>
           </div>
@@ -161,6 +162,40 @@ function App() {
 
     </div>
   }
+
+  const modalItem = (listingItem) => {
+    return <div>
+      {
+        listingItem.map((el) => (
+          <div className="d-flex">
+            <div className="card p-4 justify-content-center align-items-center" id="modal-picture">
+              <img src={`http://localhost:8081/${el.image}`} id="modal-image"></img>
+            </div>
+            <div className="ms-5 w-100">
+              <div>
+                <label className="form-label">Item Name</label>
+                <input className="form-control mb-3"></input>
+                <label className="form-label">Item Description</label>
+                <textarea className="form-control mb-3" style={{ resize: "none" }}></textarea>
+              </div>
+              <div className="d-flex mt-3">
+                <div className="flex-fill me-5">
+                  <label className="form-label">Item Price</label>
+                  <input className="form-control"></input>
+                </div>
+                <div className="flex-fill">
+                  <label className="form-label">Category</label>
+                  <input className="form-control"></input>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  }
+
+
 
   const listCartItems = filteredCart.map((el) => (
     <tr key={el.id}>
@@ -730,15 +765,20 @@ function App() {
 
           <Modal size="xl" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>View Item</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Body>
+              {modalItem(listingItem)}
+            </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
               <Button variant="primary" onClick={handleClose}>
-                Save Changes
+                Update Listing
+              </Button>
+              <Button variant="danger" onClick={handleClose}>
+                Delete Listing
               </Button>
             </Modal.Footer>
           </Modal>

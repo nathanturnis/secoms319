@@ -47,6 +47,15 @@
   max-width: 50%;
 }
 
+#modal-picture {
+  height: 300px;
+  width: 400px;
+}
+#modal-image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 .thank-you {
   margin-top: 200px;
   text-align: center;
