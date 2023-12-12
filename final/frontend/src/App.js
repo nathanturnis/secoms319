@@ -114,6 +114,33 @@ function App() {
       })
   };
 
+  const createListing = () => {
+    const newListing = {
+      id: nextID,
+      title: listTitle,
+      description: listDescription,
+      image: "",
+      price: listPrice,
+      category: listCategory,
+      location: listLocation,
+      state: listState,
+      zipcode: listZipcode,
+      sellby: listSellby
+    }
+
+    fetch("http://localhost:8081/addListing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newListing),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        getListings();
+        handleClose();
+      });
+  }
+
   const updateListing = (id) => {
     const body = {
       id: id,
@@ -883,7 +910,7 @@ function App() {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="success" onClick={handleClose}>
+              <Button variant="success" onClick={() => { createListing() }}>
                 Create Listing
               </Button>
               <Button variant="primary" onClick={() => { updateListing(listID) }}>
