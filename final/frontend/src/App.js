@@ -4,17 +4,21 @@ import Button from 'react-bootstrap/Button';
 
 function App() {
 
+  //USE STATE FOR LISTINGS MODAL
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //used to determine what views to show
   const [pageState, setPageState] = useState(0);
 
+  //holds main list of products
   const [Products, setProducts] = useState([]);
   const [FilteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState('');
 
+  //holds cart information
   const [cartTotal, setCartTotal] = useState(0);
   const [cart, setCart] = useState([]);
   const [filteredCart, setFilteredCart] = useState([]);
@@ -44,8 +48,10 @@ function App() {
   const [listZipcode, setListZipcode] = useState(0);
   const [listSellby, setListSellby] = useState('');
 
+  //holds the next id for creating a listing
   const [nextID, setNextID] = useState(0);
 
+  //use effects ensure things are updated
   useEffect(() => {
     getProducts();
   }, []);
@@ -60,6 +66,7 @@ function App() {
     }
   }, [listingItem])
 
+  //get the cart total
   const total = () => {
     let totalVal = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -68,14 +75,18 @@ function App() {
     setCartTotal(totalVal);
   };
 
+  //gets how many of the same item are in the cart
   function howManyofThis(id) {
     let hmot = cart.filter((cartItem) => cartItem.id === id);
     return hmot.length;
   }
 
+  //adds a product to the cart
   const addToCart = (el) => {
     setCart([...cart, el]);
   }
+
+  //removes an item from the cart
   const removeFromCart = (el) => {
 
     const indexToRemove = cart.findIndex(item => item.id === el.id);
@@ -96,6 +107,7 @@ function App() {
     }
   };
 
+  //GET method to get all the products
   const getProducts = () => {
     fetch("http://localhost:8081/allProducts")
       .then((response) => response.json())
@@ -106,6 +118,7 @@ function App() {
       });
   };
 
+  //GET method to get all the listings
   const getListings = () => {
     fetch("http://localhost:8081/allListings")
       .then((response) => response.json())
@@ -116,6 +129,7 @@ function App() {
       })
   };
 
+  //POST method to create a new listing
   const createListing = () => {
     const newListing = {
       id: nextID,
@@ -143,6 +157,7 @@ function App() {
       });
   }
 
+  //PUT method to update a listing
   const updateListing = (id) => {
     const body = {
       id: id,
@@ -172,6 +187,7 @@ function App() {
       })
   }
 
+  //DELETE method to delete a listing
   const deleteListing = (id) => {
     fetch("http://localhost:8081/deleteListing", {
       method: "DELETE",
@@ -186,6 +202,7 @@ function App() {
       });
   }
 
+  //updates the modal item details and the corresponding useStates
   function updateItemDetails() {
     if (listingItem[0] != null) {
       if (!isCreatingListing) {
@@ -197,6 +214,7 @@ function App() {
         document.getElementById("update-listing-btn").disabled = true;
         document.getElementById("delete-listing-btn").disabled = true;
       }
+
       setListID(listingItem[0].id);
       setListTitle(listingItem[0].title);
       setListDescription(listingItem[0].description);
@@ -210,7 +228,8 @@ function App() {
     }
   }
 
-  const test = {
+  //an empty item
+  const emptyItem = {
     id: 0,
     title: "",
     description: "",
@@ -224,6 +243,7 @@ function App() {
     sellby: ""
   }
 
+  //returns a grid view of the list of products
   const listProducts = (FilteredProducts) => {
     return <div
       className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-3 mb-5"
@@ -262,6 +282,7 @@ function App() {
     </div>
   }
 
+  //returns a grid view of the list of listings
   const listListingItems = (listings) => {
     return <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2 d-flex mt-3 mb-5"
       id="listings-grid"> {
@@ -295,6 +316,7 @@ function App() {
     </div>
   }
 
+  //contains the information for the listing modal
   const modalItem = (listingItem) => {
     return <div>
       {
@@ -358,8 +380,7 @@ function App() {
     </div>
   }
 
-
-
+  //contains a table listing out each item in the cart
   const listCartItems = filteredCart.map((el) => (
     <tr key={el.id}>
       <th scope="row" style={{ width: 30 + '%' }}>
@@ -377,6 +398,7 @@ function App() {
     </tr>
   ));
 
+  //filters the cart so only 1 of each item type is in the cart
   function filterCart() {
 
     setFilteredCart(() => {
@@ -396,6 +418,7 @@ function App() {
     });
   }
 
+  //handles searching
   const handleChange = (e) => {
     setQuery(e.target.value);
     removeCategory();
@@ -406,6 +429,7 @@ function App() {
     setFilteredProducts(results);
   }
 
+  //handles when a category is selected to filter the products
   const handleCategoryChange = (e) => {
     // console.log(e.target.value);
     if (e.target.value === "") {
@@ -423,6 +447,7 @@ function App() {
     document.getElementById("category-select").firstChild.value = "";
   }
 
+  //removes the category filter
   const removeCategory = () => {
     setFilteredProducts(Products);
     document.getElementById("category-text").innerHTML = "";
@@ -431,10 +456,12 @@ function App() {
     document.getElementById("category-select").firstChild.value = "";
   }
 
+  //checks to see if n is a number
   const isNumeric = (n) => {
     return !isNaN(parseFloat(n)) && isFinite(n)
   }
 
+  //adds dashes for every 4 numbers inputted to card input
   const cardInputDashes = (e) => {
     e.value = e.value.replace(/-/g, '');
     let newVal = '';
@@ -450,6 +477,7 @@ function App() {
     e.value = newVal;
   }
 
+  //validates the input when the user places an order
   const validate = (e) => {
     let isValidated = true;
     let nameInput = document.getElementById("inputName");
@@ -487,10 +515,11 @@ function App() {
     }
 
     if (isValidated) {
-      setPageState(3);
+      setPageState(3); //payment confirmation
     }
   }
 
+  //displays the payment information in the order confirmation screen
   const displayInformation = () => {
     return (
       <ul className="list-group list-group-flush">
@@ -501,6 +530,7 @@ function App() {
       </ul>);
   }
 
+  //resets the page
   const resetPage = () => {
     setCart([]);
     setCartTotal(0);
@@ -883,6 +913,7 @@ function App() {
 
       </div>
     );
+
     //LISTINGS PAGE
   } else if (pageState == 4) {
     return (
@@ -926,7 +957,7 @@ function App() {
         <div className="container">
 
           <div className="mt-3">
-            <button className="btn btn-success" onClick={() => { handleShow(); setListingItem([test]); setIsCreatingListing(true) }}> + Create New Listing</button>
+            <button className="btn btn-success" onClick={() => { handleShow(); setListingItem([emptyItem]); setIsCreatingListing(true) }}> + Create New Listing</button>
           </div>
 
           {listListingItems(listings)}
